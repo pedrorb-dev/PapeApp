@@ -34,5 +34,26 @@
             $sql->execute();
         }
 
+        public function delete_categoria($id_cat) {
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "DELETE FROM categoria WHERE id_categoria = ?";
+            $sql = $conectar -> prepare($sql);
+            $sql -> bindValue(1, $id_cat);
+            $sql->execute();
+        }
+
+        public function uptade_categoria($nombre_cat, $id_cat) {
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "UPDATE categoria SET  nombre_categoria =? WHERE id_categoria = ?";
+            $sql = $conectar -> prepare($sql);
+            $sql -> bindValue(1, $nombre_cat);
+            $sql -> bindValue(2, $id_cat);
+            $sql->execute();
+        }
+
     }
 ?>
