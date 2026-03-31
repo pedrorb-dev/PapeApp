@@ -48,11 +48,12 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "UPDATE categoria SET nombre_categoria=? WHERE id_categoria=?";
+            $sql = "UPDATE categoria SET nombre_categoria =? WHERE id_categoria = ?";
             $sql = $conectar -> prepare($sql);
-            $sql -> bindValue(2, $id_cat);
             $sql -> bindValue(1, $nombre_cat);
+            $sql -> bindValue(2, $id_cat);
             $sql->execute();
         }
+
     }
 ?>

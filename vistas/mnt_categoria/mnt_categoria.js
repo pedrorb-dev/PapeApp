@@ -106,16 +106,16 @@ function eliminar(id_categoria){
         if (result.isConfirmed) {
 
             $.post("../../controladores/CategoriaControlador.php?opc=eliminar",{id_categoria:id_categoria},function (data) {
-                console.log(data);
-            });
-
-            $('#tabla-categorias').DataTable().ajax.reload();	
+                $('#tabla-categorias').DataTable().ajax.reload();	
 
             Swal.fire(
                 'Eliminado!',
                 'El registro se elimino correctamente.',
                 'success'
             )
+            });
+
+            
         }
     })
 }
@@ -126,7 +126,6 @@ $(document).on("click","#add_cat", function(){
 
     $('#modal-titulo').html('Nuevo Registro');
     $('#modalmant').modal('show');
-    $("#id_categoria").val("");
     $('#categoria-form')[0].reset();
 });
 
