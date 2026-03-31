@@ -8,7 +8,7 @@
             $sql = "SELECT * FROM categoria";
             $sql = $conectar -> prepare($sql);
             $sql->execute();
-            $respuesta = $sql -> fetchAll();
+            $respuesta = $sql -> fetchAll(); 
             return $respuesta;
         }
 
@@ -34,5 +34,25 @@
             $sql->execute();
         }
 
+        public function delete_categoria_id($id_cat) {
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "DELETE FROM categoria WHERE id_categoria = ?";
+            $sql = $conectar -> prepare($sql);
+            $sql -> bindValue(1, $id_cat);
+            $sql->execute();
+        }
+
+        public function update_categoria($id_cat, $nombre_cat) {
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "UPDATE categoria SET nombre_categoria=? WHERE id_categoria=?";
+            $sql = $conectar -> prepare($sql);
+            $sql -> bindValue(2, $id_cat);
+            $sql -> bindValue(1, $nombre_cat);
+            $sql->execute();
+        }
     }
 ?>
