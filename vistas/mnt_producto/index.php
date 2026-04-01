@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorias</title>
+    <title>Productos</title>
     <!-- ICONOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -18,15 +18,22 @@
 
 </head>
 <body>
-    <?php require_once("../menu.php");?>
+
     <div class="container">
-        <button class="btn btn-info my-3" id="add_cat">Agregar Categoria</button>
+        <button class="btn btn-info my-3" id="add_prod">Agregar Producto</button>
         <div class="table-responsive">
-            <table id="tabla-categorias" class="table table-striped table-bordered" style="width:100%">
+            <table id="tabla-productos" class="table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>ID PRODUCTO</th>
+                <th>ID CATEGORIA</th>
                 <th>NOMBRE</th>
+                <th>DESCRIPCION</th>
+                <th>PRECIO</th>
+                <th>COSTO</th>
+                <th>MARCA</th>
+                <th>STOCK MINIMO</th>
+                <th>STOCK MAXIMO</th>
                 <th>EDITAR</th>
                 <th>ELIMINAR</th>
             </tr>
@@ -36,7 +43,7 @@
             </table>
         </div>
     </div>
-    <?php require_once("modal_categoria.php")?>
+    <?php require_once("modal_producto.php")?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -50,6 +57,6 @@
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="mnt_categoria.js"></script>
+    <script src="mnt_producto.js"></script>
 </body>
 </html>

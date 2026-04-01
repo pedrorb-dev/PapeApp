@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php require_once("menu.php")?>
+    <!-- LOGIN -->
 </body>
 </html>

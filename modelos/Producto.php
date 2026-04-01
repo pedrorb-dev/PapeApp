@@ -1,5 +1,4 @@
 <?php
-    <?php
     class Producto extends Conexion {
         public function get_producto() {
             $conectar = parent::conectar();
@@ -43,7 +42,7 @@
             $sql->execute();
         }
 
-        public function delete_producto($id_prod) {
+        public function delete_producto_id($id_prod) {
             $conectar = parent::conectar();
             parent::set_names();
 
@@ -80,5 +79,4 @@
             $sql->execute();
         }
     }
-?>
 ?>

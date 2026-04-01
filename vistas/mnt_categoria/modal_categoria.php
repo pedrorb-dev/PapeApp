@@ -2,6 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <h2>Registrar Categoria</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <i class="font-icon-close-2"></i>
         </button>
@@ -11,7 +12,7 @@
           
           
           <div class="modal-body">
-            <h1 class="modal-title fs-5" id="modal-titulo">Ingresar Categoria</h1>
+            <h1 class="modal-title fs-5" id="modal-titulo"></h1>
             <input type="hidden" name="id_categoria" id="id_categoria">
             <div class="form-group">
               <label for="">Nombre de la categoria</label>

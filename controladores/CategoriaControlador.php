@@ -49,12 +49,20 @@
                     $otp["nombre_categoria"] = $dato["nombre_categoria"];
                 }
                 echo json_encode($otp);
-            }
-
-            
+            }       
             break;
         case "eliminar":
             $categoria -> delete_categoria_id($_POST["id_categoria"]);
-            break;    
+            break;   
+        case "combo":
+            $datos = $categoria->get_categoria();
+            if(is_array($datos) == true and count($datos) > 0) {
+                $html = "<option label='Seleccione una categoria'></option>";
+                foreach($datos as $dato) {
+                    $html .= "<option value='".$dato["id_categoria"]."'>".$dato["nombre_categoria"]."</option>";
+                }
+                echo $html;
+            }    
+            break;
     }
 ?>
