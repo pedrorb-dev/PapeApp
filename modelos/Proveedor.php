@@ -28,7 +28,7 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "INSERT INTO proveedores(id_proveedor, nombre_proveedor, correo, telefono_1, telefono_2, RFC) 
+            $sql = "INSERT INTO proveedor(id_proveedor, nombre_proveedor, correo, telefono_1, telefono_2, RFC) 
                         VALUES (NULL, ?, ?, ?, ?, ?)";
             $sql = $conectar -> prepare($sql);
             $sql -> bindValue(1, $nombre);
@@ -54,7 +54,7 @@
             parent::set_names();
 
             $sql = "UPDATE proveedor
-                        SET nombre_proveeddor =?,
+                        SET nombre_proveedor =?,
                         correo =?, 
                         telefono_1 = ?,
                         telefono_2 = ?,
@@ -63,7 +63,7 @@
             $sql = $conectar -> prepare($sql);
 
             $sql -> bindValue(1, $nombre);
-            $sql -> bindValue(1, $correo);
+            $sql -> bindValue(2, $correo);
             $sql -> bindValue(3, $tel1);
             $sql -> bindValue(4, $tel2);
             $sql -> bindValue(5, $rfc);
