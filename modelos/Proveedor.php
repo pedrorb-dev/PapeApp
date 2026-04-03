@@ -24,18 +24,19 @@
             return $respuesta;
         }
 
-        public function insert_proveedor($nombre, $correo, $tel1, $tel2, $rfc) {
+        public function insert_proveedor($id_direccion, $nombre, $correo, $tel1, $tel2, $rfc) {
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "INSERT INTO proveedor(id_proveedor, nombre_proveedor, correo, telefono_1, telefono_2, RFC) 
-                        VALUES (NULL, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO proveedor(id_proveedor, nombre_proveedor, correo, telefono_1, telefono_2, RFC, id_direccion) 
+                        VALUES (NULL, ?, ?, ?, ?, ?, ?)";
             $sql = $conectar -> prepare($sql);
             $sql -> bindValue(1, $nombre);
             $sql -> bindValue(2, $correo);
             $sql -> bindValue(3, $tel1);
             $sql -> bindValue(4, $tel2);
             $sql -> bindValue(5, $rfc);
+            $sql -> bindValue(6, $id_direccion);
             $sql->execute();
         }
 
@@ -49,7 +50,7 @@
             $sql->execute();
         }
 
-        public function update_proveedor($id_proveedor, $nombre, $correo, $tel1, $tel2, $rfc) {
+        public function update_proveedor($id_proveedor, $id_direccion, $nombre, $correo, $tel1, $tel2, $rfc) {
             $conectar = parent::conectar();
             parent::set_names();
 
@@ -58,7 +59,8 @@
                         correo =?, 
                         telefono_1 = ?,
                         telefono_2 = ?,
-                        RFC = ?
+                        RFC = ?,
+                        id_direccion = ?
                         WHERE id_proveedor=?";
             $sql = $conectar -> prepare($sql);
 
@@ -68,6 +70,8 @@
             $sql -> bindValue(4, $tel2);
             $sql -> bindValue(5, $rfc);
             $sql -> bindValue(6, $id_proveedor);
+            $sql -> bindValue(7, $id_direccion);
+
             $sql->execute();
         }
 

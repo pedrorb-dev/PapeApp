@@ -13,7 +13,7 @@
         return $respuesta;
     }
 
-    public function get_venta($id_venta){
+    public function get_venta_id($id_venta){
         $conectar = parent::conectar(); #para llamar al metodo de la clase padre
         parent::set_names();
 

@@ -1,30 +1,30 @@
 <?php
-    class Pedido extends Conexion {
+    class Detalle_pedido extends Conexion {
 
-        public function get_pedido(){
+        public function get_detalle_pedido(){
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM pedido";
+            $sql = "SELECT * FROM detalle_pedido";
             $sql = $conectar -> prepare($sql);
             $sql->execute();
             $respuesta = $sql -> fetchAll();
             return $respuesta;
         }
 
-        public function get_pedido_id($id_pedido) {
+        public function get_detalle_pedido_id($id_det) {
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM pedido WHERE id_pedido = ?";
+            $sql = "SELECT * FROM detalle_pedido WHERE id_detalle_pedido = ?";
             $sql = $conectar -> prepare($sql);
-            $sql -> bindValue(1, $id_pedido);
+            $sql -> bindValue(1, $id_det);
             $sql->execute();
             $respuesta = $sql -> fetchAll();
             return $respuesta;
         }
-
-        public function insert_pedido($id_proveedor, $estado) {
+        #costo se trae desde la tabla productos
+        public function insert_detalle_pedido($id_pedido, $id_producto, $cantidad) {
             $conectar = parent::conectar();
             parent::set_names();
 
@@ -61,7 +61,7 @@
             $sql->bindValue(2, $id_pedido);
             $sql->execute();
         }
-    
-
     }
+
+
 ?>
