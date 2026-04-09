@@ -24,7 +24,7 @@
             return $respuesta;
         }
 
-        public function insert_proveedor($id_direccion, $nombre, $correo, $tel1, $tel2, $rfc) {
+        public function insert_proveedor($id_direccion, $nombre, $correo, $tel1, $tel2, $rfc, $id_domicilio) {
             $conectar = parent::conectar();
             parent::set_names();
 

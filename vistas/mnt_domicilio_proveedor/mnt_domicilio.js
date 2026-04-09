@@ -1,15 +1,12 @@
 var tabla;
 
 function init(){
-    $("#proveedor-form").on("submit",function(e){
+    $("#domicilio-form").on("submit",function(e){
         guardaryeditar(e);	
     });
 }
 
 $(document).ready(function(){
-    /*$.post("../../controladores/DomicilioProveedorControlador.php?opc=combo",function (data) {
-        $("#id_categoria").html(data);
-    });*/
 
     tabla=$('#tabla-domicilios').dataTable({
 		"aProcessing": true,//Activamos el procesamiento del datatables
@@ -63,9 +60,9 @@ $(document).ready(function(){
 
 function guardaryeditar(e){
     e.preventDefault();
-    var formData = new FormData($("#proveedor-form")[0]);
+    var formData = new FormData($("#domicilio-form")[0]);
     $.ajax({
-        url: "../../controladores/DomicilioProveedorControlador.php?opc=guardaryeditar",
+        url: "../../controladores/DomicilioProveedorControlador.php?opc=guardar_editar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -74,7 +71,8 @@ function guardaryeditar(e){
                 console.log(e.responseText);	
         },
         success: function(datos){
-            $('#proveedor-form')[0].reset();
+            console.log(datos)
+            $('#domicilio-form')[0].reset();
             $("#modalmant").modal('hide');
             $('#tabla-domicilios').DataTable().ajax.reload();
 
@@ -87,24 +85,23 @@ function guardaryeditar(e){
     });
 }
 
-function editar(id_proveedor){
-    $.post("../../controladores/DomicilioProveedorControlador.php?opc=mostrar",{id_proveedor:id_proveedor},function (data) {
+function editar(id_domicilio_proveedor){
+    $.post("../../controladores/DomicilioProveedorControlador.php?opc=mostrar",{id_domicilio_proveedor: id_domicilio_proveedor},function (data) {
         console.log(data);
         data = JSON.parse(data);
-        
-        $('#id_proveedor').val(data.id_proveedor);
-        $('#nombre_proveedor').val(data.nombre_proveedor);
-        $('#correo').val(data.correo);
-        $('#telefono_1').val(data.telefono_1);
-        $('#telefono_2').val(data.telefono_2);
-        $('#RFC').val(data.RFC);
+        $('#id_domicilio_proveedor').val(data.id_domicilio_proveedor);
+        $('#calle').val(data.calle);
+        $('#ciudad').val(data.ciudad);
+        $('#numero').val(data.numero);
+        $('#colonia').val(data.colonia);
+        $('#codigo_postal').val(data.codigo_postal);
     });
     $('#modal-titulo').html('Editar Registro');
     $('#modalmant').modal('show');
 }
 
-function eliminar(id_proveedor){
-    console.log(id_proveedor);
+function eliminar(id_domicilio_proveedor){
+    console.log(id_domicilio_proveedor);
     swal.fire({
         title: 'CRUD',
         text: "Desea Eliminar el Registro?",
@@ -115,7 +112,7 @@ function eliminar(id_proveedor){
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post("../../controladores/DomicilioProveedorControlador.php?opc=eliminar",{id_proveedor:id_proveedor},function (data) {
+            $.post("../../controladores/DomicilioProveedorControlador.php?opc=eliminar",{id_domicilio_proveedor:id_domicilio_proveedor},function (data) {
                 $('#tabla-domicilios').DataTable().ajax.reload();	    
             });
             swal.fire(
@@ -127,16 +124,17 @@ function eliminar(id_proveedor){
     })
 }
 
-$(document).on("click","#add_prov", function(){
-    $('#id_proveedor').val("");
-    $('#nombre_proveedor').val("");
-    $('#correo').val("");
-    $('#telefono_1').val("");
-    $('#telefono_2').val("");
-    $('#RFC').val("");
+$(document).on("click","#add_dom", function(){
+    $('#id_domicilio_proveedor').val("");
+    $('#calle').val("");
+    $('#ciudad').val("");
+    $('#numero').val("");
+    $('#colonia').val("");
+    $('#codigo_postal').val("");
 
     $('#modal-titulo').html('Agregar Registro');
     $('#modalmant').modal('show');
+    
 });
 
 init();
