@@ -1,5 +1,5 @@
 <?php
-    class DetalleVenta extends Conexion {
+    class DetalleCompra extends Conexion {
         public function get_detalle_compra(){
             $conectar = parent::conectar();
             parent::set_names();
