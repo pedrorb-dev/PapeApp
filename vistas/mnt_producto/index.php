@@ -33,7 +33,7 @@
                 <th>COSTO</th>
                 <th>MARCA</th>
                 <th>STOCK MINIMO</th>
-                <th>STOCK MAXIMO</th>
+                <th>EXISTENCIAS</th>
                 <th>EDITAR</th>
                 <th>ELIMINAR</th>
             </tr>

@@ -4,7 +4,10 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM compra";
+            $sql = "SELECT c.*, p.nombre_proveedor
+            FROM compra c
+            INNER JOIN proveedor p 
+            ON c.id_proveedor = p.id_proveedor"; #join para también mostrar el nombre del proveedor
             $sql = $conectar -> prepare($sql);
             $sql->execute();
             $respuesta = $sql -> fetchAll();

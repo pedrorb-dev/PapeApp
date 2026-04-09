@@ -7,9 +7,6 @@ function init(){
 }
 
 $(document).ready(function(){
-    /*$.post("../../controladores/DomicilioProveedorControlador.php?opc=combo",function (data) {
-        $("#id_categoria").html(data);
-    });*/
 
     tabla=$('#tabla-domicilios').dataTable({
 		"aProcessing": true,//Activamos el procesamiento del datatables
@@ -64,6 +61,7 @@ $(document).ready(function(){
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#domicilio-form")[0]);
+
     $.ajax({
         url: "../../controladores/DomicilioProveedorControlador.php?opc=guardar_editar",
         type: "POST",
@@ -134,9 +132,17 @@ $(document).on("click","#add_dom", function(){
     $('#numero').val("");
     $('#colonia').val("");
     $('#codigo_postal').val("");
+$(document).on("click","#add_dom", function(){
+    $('#id_domicilio_proveedor').val("");
+    $('#calle').val("");
+    $('#ciudad').val("");
+    $('#numero').val("");
+    $('#colonia').val("");
+    $('#codigo_postal').val("");
 
     $('#modal-titulo').html('Agregar Registro');
     $('#modalmant').modal('show');
+    
 });
 
 init();

@@ -45,7 +45,7 @@
               <input type="text" class="form-control" name="min_stock" id="min_stock">
           </div>
           <div class="form-group">
-              <label for="">Stock Maximo</label>
+              <label for="">Existencias</label>
               <input type="text" class="form-control" name="stock" id="stock">
           </div>
           </div>
