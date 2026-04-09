@@ -125,13 +125,7 @@ function eliminar(id_domicilio_proveedor){
     })
 }
 
-$(document).on("click","#add_dom", function(){
-    $('#id_domicilio_proveedor').val("");
-    $('#calle').val("");
-    $('#ciudad').val("");
-    $('#numero').val("");
-    $('#colonia').val("");
-    $('#codigo_postal').val("");
+
 $(document).on("click","#add_dom", function(){
     $('#id_domicilio_proveedor').val("");
     $('#calle').val("");
