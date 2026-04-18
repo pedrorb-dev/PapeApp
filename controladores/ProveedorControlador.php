@@ -58,5 +58,15 @@
         case "eliminar":
             $proveedor->delete_proveedor($_POST["id_proveedor"]);
             break;
+        case "combo":
+            $datos = $proveedor->get_proveedor();
+            if(is_array($datos) == true and count($datos) > 0) {
+                $html = "<option label='Seleccione un proveedor'></option>";
+                foreach($datos as $dato) {
+                    $html .= "<option value='".$dato["id_proveedor"]."'>".$dato["nombre_proveedor"]."</option>";
+                }
+                echo $html;
+            }    
+            break;
     }
 ?>

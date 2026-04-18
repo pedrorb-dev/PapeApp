@@ -14,7 +14,8 @@
             foreach($datos as $dato) {  
                 $mini_array = array();
 
-                $mini_array[] = $dato["id_domicilio_proveedor"];  
+                $mini_array[] = $dato["id_domicilio_proveedor"];
+                $mini_array[] = $dato["id_proveedor"];  
                 $mini_array[] = $dato["calle"];    
                 $mini_array[] = $dato["ciudad"];    
                 $mini_array[] = $dato["numero"];   
@@ -38,10 +39,10 @@
 
             if(empty($_POST["id_domicilio_proveedor"])) {
                 if(is_array($datos)==true and count($datos)==0) {
-                    $direccion -> insert_domicilio_proveedor($_POST["calle"], $_POST["ciudad"], $_POST["numero"], $_POST["colonia"], $_POST["codigo_postal"]);
+                    $direccion -> insert_domicilio_proveedor($_POST["id_proveedor"], $_POST["calle"], $_POST["ciudad"], $_POST["numero"], $_POST["colonia"], $_POST["codigo_postal"]);
                 }
             } else {
-                $direccion -> update_domicilio_proveedor($_POST["id_domicilio_proveedor"], $_POST["calle"], $_POST["ciudad"], $_POST["numero"], $_POST["colonia"], $_POST["codigo_postal"]);
+                $direccion -> update_domicilio_proveedor($_POST["id_domicilio_proveedor"], $_POST["id_proveedor"],$_POST["calle"], $_POST["ciudad"], $_POST["numero"], $_POST["colonia"], $_POST["codigo_postal"]);
             }
             break;
         case "mostrar":
@@ -50,6 +51,7 @@
                 $otp = array();
                 foreach($datos as $dato) {
                     $otp["id_domicilio_proveedor"] = $dato["id_domicilio_proveedor"];
+                    $otp["id_proveedor"] = $dato["id_proveedor"];
                     $otp["calle"] = $dato["calle"];
                     $otp["ciudad"] = $dato["ciudad"];
                     $otp["numero"] = $dato["numero"];
@@ -62,16 +64,5 @@
         case "eliminar":
             $direccion -> delete_domicilio_proveedor($_POST["id_domicilio_proveedor"]);
             break;   
-            /*
-        case "combo":
-            $datos = $categoria->get_categoria();
-            if(is_array($datos) == true and count($datos) > 0) {
-                $html = "<option label='Seleccione una categoria'></option>";
-                foreach($datos as $dato) {
-                    $html .= "<option value='".$dato["id_categoria"]."'>".$dato["nombre_categoria"]."</option>";
-                }
-                echo $html;
-            }    
-            break;*/
     }
 ?>

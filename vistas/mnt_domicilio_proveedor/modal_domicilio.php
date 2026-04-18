@@ -13,6 +13,10 @@
             <h1 class="modal-title fs-5" id="modal-titulo"></h1>
             <input type="hidden" name="id_domicilio_proveedor" id="id_domicilio_proveedor">
             <div class="form-group">
+              <label for="">Proveedor</label>
+              <select class="form-control" name="id_proveedor" id="id_proveedor" data-placeholder="Seleccione"></select>
+            </div>
+            <div class="form-group">
               <label for="">Calle</label>
               <input type="text" class="form-control" name="calle" id="calle">
             </div>

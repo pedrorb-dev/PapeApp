@@ -26,6 +26,7 @@
             <thead>
             <tr>
                 <th>ID DOMICILIO</th>
+                <th>ID PROVEEDOR</th>
                 <th>CALLE</th>
                 <th>CIUDAD</th>
                 <th>NUMERO</th>
