@@ -1,0 +1,97 @@
+html{
+    height: 100%;;
+}
+body{
+    margin:0;
+    padding:0;
+    height: 100%;
+    /*background-image: url(/img/fondo.jpg);*/
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.layout{
+    display:flex;
+    height: 100%;
+}
+.fondo{
+    position: relative;
+    display: flex;
+    flex-direction: column; /* hijos en columna */
+    justify-content: center;
+    align-items: flex-end;     /* los alinea a la derecha */
+    background-color: rgb(50, 113, 121);
+    width: 30%;
+    height: 100%;
+}
+
+.fondo .logo {
+    width: 210px;
+    height: auto;
+    position: absolute;
+    right: 30%;
+    top:10%;
+}
+
+.container{
+    background-color: rgba(154, 224, 228, 0.2);
+    margin: auto; /* mueve el div hacia la derecha */
+    padding: 170px;
+    text-align: center;
+    margin-top: 30px;
+    border-radius: 15px;
+}
+
+/*para los botones del login*/
+.container .elemento input{
+    margin: 15px;
+    font-size: 20px;
+    width: 370px; 
+    border:none;
+    border-bottom:1px solid #434141;
+    height: 35px;
+    background:transparent;
+}
+
+.container .elemento a{
+    text-decoration: underline;
+}
+
+.container .elemento input:focus{
+    outline: none;
+}
+
+.container .elemento input[type=submit] {
+    margin-top: 40px;
+    background-color: rgb(158, 194, 220);
+    border: 1px solid black; 
+    height: 45px;
+    border-radius: 10px;
+    width: 200px;
+    border: none; /*se ve mejor si el borde?*/
+}
+
+.container .elemento input[type=submit]:hover {
+    background-color:  rgb(122, 162, 190);
+    cursor: pointer;
+}
+
+.container a:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+.fondo a{
+    background-color: rgb(41, 106, 115);
+    width: 150px;
+    padding: 20px;
+    margin: 10px 0 10px 10px;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+
+.fondo a:hover{
+    background-color:  rgb(24, 76, 82); 
+    cursor: pointer;
+}
