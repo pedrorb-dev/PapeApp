@@ -95,3 +95,7 @@ body{
     background-color:  rgb(24, 76, 82); 
     cursor: pointer;
 }
+
+#registro-form {
+    display: none;
+}

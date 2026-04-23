@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,33 +11,51 @@
 <body>
     <div class="layout">
         <div class="fondo">
-            <img src="/img/logo_transparente.png" class="logo">
+            <img src="./img/logo_transparente.png" class="logo">
             <a>Registrarse</a> <!--estos botones también pueden ser un formulario para que se carguen diferentes partesd de la página-->
             <a>Iniciar sesión</a>
         </div>
         <div class="container">
-            <h2>Iniciar Sesión</h2>
-            <?php
-                require_once("../config/Conexion.php");
-                require_once("../modelos/Usuarios.php");
-            ?>
-            <img src="/img/usuarios.png" width="50" height="50">
-            <form id="forma" method="POST">
-                <div class="elemento">
-                    <i class="bi bi-person"></i>
-                    <input type="text" id="usuario" name="usuario" required="true", placeholder="Ususario">
-                </div>
-                <div class="elemento">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" id="contraseña" name="contraseña" required="true" placeholder="Contraseña">
-                </div>
-                <div class="elemento">
-                    <input type="submit" value="Ingresar" name="ingresar" id="ingresar">
-                </div>
-                <div class="elemento">
-                    <p>No tienes un usuario aún? <a>Registrate<a></p>
-                </div>      
-            </form>
+            <div id="login-form">
+                <h2>Iniciar Sesión</h2>
+                <img src="./img/usuarios.png" width="50" height="50">
+                <form id="forma" method="POST">
+                    <div class="elemento">
+                        <i class="bi bi-person"></i>
+                        <input type="text" id="usuario" name="usuario" required="true", placeholder="Ususario">
+                    </div>
+                    <div class="elemento">
+                        <i class="bi bi-lock"></i>
+                        <input type="password" id="contraseña" name="contraseña" required="true" placeholder="Contraseña">
+                    </div>
+                    <div class="elemento">
+                        <input type="submit" value="Ingresar" name="ingresar" id="ingresar">
+                    </div>
+                    <div class="elemento">
+                        <p>No tienes un usuario aún? <a>Registrate</a></p>
+                    </div>      
+                </form>
+            </div>
+            <div id="registro-form">
+                <h2>Registrarse</h2>
+                <img src="./img/usuarios.png" width="50" height="50">
+                <form id="forma-registro" method="POST">
+                    <div class="elemento">
+                        <i class="bi bi-person"></i>
+                        <input type="text" id="usuario" name="usuario" required="true", placeholder="Ususario">
+                    </div>
+                    <div class="elemento">
+                        <i class="bi bi-lock"></i>
+                        <input type="password" id="contraseña" name="contraseña" required="true" placeholder="Contraseña">
+                    </div>
+                    <div class="elemento">
+                        <input type="submit" value="Ingresar" name="ingresar" id="ingresar">
+                    </div>
+                    <div class="elemento">
+                        <p>No tienes un usuario aún? <a>Registrate</a></p>
+                    </div>      
+                </form>
+            </div>
         </div>
     </div>
 </body>
