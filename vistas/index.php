@@ -28,11 +28,48 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post">
+    <!--<form method="post">
         <button type="submit" name="iniciar_sesion">Iniciar Sesion</button>
         <button type="submit" name="registrarse">Registrarse</button>
-    </form>
+    </form>-->
 
+    <button onClick="inicio()">Iniciar Sesion</button>
+    <button onClick="registro()">Registrarse</button>
+
+    <div id="registrarse" style="display:none;">
+
+        <h1>Registrarse</h1>
+            <form action="" method="post">
+                <input type="text" name="user" id="user">
+                <input type="text" name="pass" id="pass">
+                <button type="submit">Enviar</button>
+            </form>
+    </div>
+    <div id="iniciar_sesion">
+
+        <h1>Iniciar sesion</h1>
+        <form action="" method="post">
+            <input type="text" name="user" id="user">
+            <input type="text" name="pass" id="pass">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script>
+        
+        'use strict'
+
+        function inicio() {
+            document.getElementById("iniciar_sesion").style.display="block"
+            document.getElementById("registrarse").style.display="none"
+        }
+
+        function registro() {
+            document.getElementById("registrarse").style.display="block"
+            document.getElementById("iniciar_sesion").style.display="none"
+        }
+
+        
+    </script>
     <!--<?php if($opcion == "registrarse"){ ?>
         <h1>Registrarse</h1>
         <form action="" method="post">
@@ -51,4 +88,4 @@
     <?php }?>-->
 
 </body>
-</html>
+</html> 
