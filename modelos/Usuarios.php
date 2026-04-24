@@ -32,7 +32,7 @@
             $sql = $conectar -> prepare($sql);
             $sql -> bindValue(1, $nombre);
             $sql -> bindValue(2, $contraseña);
-            $sql -> bindValue(2, $rol);
+            $sql -> bindValue(3, $rol);
             $sql->execute();
         }
 
@@ -58,6 +58,22 @@
             $sql -> bindValue(1, $id_usuario);
 
             $sql->execute();
+        }
+
+        public function login($usuario, $contraseña) {
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "SELECT * FROM usuarios
+                        WHERE nombre_usuario = ? AND contrasena =?";
+            $sql = $conectar -> prepare($sql);
+
+            $sql -> bindValue(1, $usuario);
+            $sql -> bindValue(2, $contraseña);
+
+            $sql->execute();
+            $respuesta = $sql -> fetchAll();
+            return $respuesta;   
         }
 
     }
