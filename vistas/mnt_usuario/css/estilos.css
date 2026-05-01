@@ -19,7 +19,7 @@ body{
     flex-direction: column; /* hijos en columna */
     justify-content: center;
     align-items: flex-end;     /* los alinea a la derecha */
-    background-color: rgb(50, 113, 121);
+    background-color: rgb(86, 177, 184);
     width: 30%;
     height: 100%;
 }
@@ -81,7 +81,7 @@ body{
 }
 
 .fondo a{
-    background-color: rgb(41, 106, 115);
+    background-color: rgb(70, 155, 161);
     width: 150px;
     padding: 20px;
     margin: 10px 0 10px 10px;
@@ -92,10 +92,13 @@ body{
 
 
 .fondo a:hover{
-    background-color:  rgb(24, 76, 82); 
+    background-color: rgb(29, 99, 104) ;
     cursor: pointer;
 }
 
-#registro-form {
+#registro-form{
     display: none;
 }
+
+
+

@@ -23,7 +23,11 @@ $(document).ready(function () {
             dataType: "json",
             error: function (error) {
                 console.log(error)
+
             }
+
+
+
         },
         "bDestroy": true,
         "responsive": true,

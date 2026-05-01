@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title> 
-    <link href = "css/estilos.css" rel="stylesheet">
+    <link href = "css/estilos.css?v=2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<body onload = "registro()">
+<body onload="registro()">
 
     <div class="layout">
         <div class="fondo">
@@ -17,7 +17,7 @@
             <a id="btn-registrarse" onClick="registro()">Registrarse</a> <!--estos botones también pueden ser un formulario para que se carguen diferentes partesd de la página-->
             <a id="btn-login" onClick="inicio()">Iniciar sesión</a>
         </div>
-        <div class="container">
+        <div class="container" >
             <div id="login-form">
                 <h2>Iniciar Sesión</h2>
                 <img src="./img/usuarios.png" width="50" height="50">
@@ -78,7 +78,7 @@
 <script>
         
         'use strict'
-
+        
         function inicio() {
             document.getElementById("login-form").style.display="block"
             document.getElementById("registro-form").style.display="none"
