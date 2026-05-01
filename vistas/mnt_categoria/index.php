@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <?php require_once("../menu.php");?>
+    <?php $titulo_pagina = 'Categorias'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_cat">Agregar Categoria</button>
         <div class="table-responsive">

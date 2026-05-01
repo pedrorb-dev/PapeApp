@@ -31,7 +31,13 @@ switch($_GET["opc"]) {
         );
 
         if ($datos) {
-            echo("Login correcto");
+             // Iniciar sesión
+            session_start();
+            #$_SESSION["id_usuario"] = $datos["id_usuario"];
+            #$_SESSION["nombre_usuario"] = $datos["nombre_usuario"];
+            #$_SESSION["rol"] = $datos["rol"];
+            echo "ok";
+            exit(); 
         } else {
             echo("Verifica que tus datos estén bien");
         }

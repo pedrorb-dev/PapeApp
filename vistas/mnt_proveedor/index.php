@@ -18,7 +18,7 @@
 
 </head>
 <body>
-
+    <?php $titulo_pagina = 'Proveedores'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_prov">Agregar Proveedor</button>
         <div class="table-responsive">

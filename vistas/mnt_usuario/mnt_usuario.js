@@ -18,14 +18,7 @@ function guardaryeditar(e) {
         success: function (datos) {
             console.log(datos);
             $('#forma-registro')[0].reset();
-           // $("#modalmant").modal('hide');
-           // $('#tabla-categorias').DataTable().ajax.reload();
 
-            /*swal.fire(
-                'Registro!',
-                'El registro correctamente.',
-                'success'
-            )*/
         }
     });
 }

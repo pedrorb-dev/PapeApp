@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<body>
+<body onload = "registro()">
 
     <div class="layout">
         <div class="fondo">
@@ -24,14 +24,14 @@
                 <form id="forma" method="POST">
                     <div class="elemento">
                         <i class="bi bi-person"></i>
-                        <input type="text" id="usuario" name="usuario" required="true", placeholder="Ususario">
+                        <input type="text" id="usuario-login" name="usuario" required="true", placeholder="Usuario">
                     </div>
                     <div class="elemento">
                         <i class="bi bi-lock"></i>
-                        <input type="password" id="contraseña" name="contraseña" required="true" placeholder="Contraseña">
+                        <input type="password" id="password-login" name="contraseña" required="true" placeholder="Contraseña">
                     </div>
                     <div class="elemento">
-                        <input type="submit" value="Ingresar" name="ingresar" id="ingresar">
+                        <input type="submit" value="Ingresar" name="ingresar" id="ingresar" onClick="validar('login')">
                     </div>
                     <div class="elemento">
                         <p>No tienes un usuario aún? <a onClick="registro()">Registrate</a></p>
@@ -44,14 +44,14 @@
                 <form id="forma-registro" method="POST">
                     <div class="elemento">
                         <i class="bi bi-person"></i>
-                        <input type="text" id="usuario" name="usuario" required="true", placeholder="Ususario">
+                        <input type="text" id="usuario-registro" name="usuario"  placeholder="Usuario">
                     </div>
                     <div class="elemento">
                         <i class="bi bi-lock"></i>
-                        <input type="password" id="contraseña" name="contraseña" required="true" placeholder="Contraseña">
+                        <input type="password" id="password-registro" name="contraseña"  placeholder="Contraseña">
                     </div>
                     <div class="elemento">
-                        <input type="submit" value="Registrarse" name="registrarse" id="registrarse">
+                        <input type="submit" value="Registrarse" name="registrarse" id="registrarse" onClick="validar('registro')">
                     </div>
                     <div class="elemento">
                     </div>      
@@ -93,7 +93,14 @@
             document.getElementById("btn-registrarse").style.backgroundColor= "rgb(24, 76, 82)"
         }
 
-        
+        function validar(forma) {
+            console.log(forma);
+            const usuario = document.getElementById(`usuario-${forma}`).value
+            const password = document.getElementById(`password-${forma}`).value
+            if(usuario.length === 0 || password.length === 0) {
+                alert("error, campos vacíos")
+            }
+        }
     </script>
 
 </html>

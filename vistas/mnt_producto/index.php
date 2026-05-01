@@ -18,7 +18,7 @@
 
 </head>
 <body>
-
+    <?php $titulo_pagina = 'Productos'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_prod">Agregar Producto</button>
         <div class="table-responsive">

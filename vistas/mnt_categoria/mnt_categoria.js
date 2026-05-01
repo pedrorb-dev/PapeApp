@@ -23,9 +23,6 @@ $(document).ready(function () {
             dataType: "json",
             error: function (error) {
                 console.log(error)
-            },
-            success: function (data) {
-                console.log(data.data)
             }
         },
         "bDestroy": true,
