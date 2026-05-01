@@ -24,9 +24,6 @@ $(document).ready(function () {
             error: function (error) {
                 console.log(error)
             },
-            success: function (data) {
-                console.log(data.data)
-            }
         },
         "bDestroy": true,
         "responsive": true,

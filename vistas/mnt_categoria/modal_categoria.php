@@ -15,7 +15,7 @@
             <h1 class="modal-title fs-5" id="modal-titulo"></h1>
             <input type="hidden" name="id_categoria" id="id_categoria">
             <div class="form-group">
-              <label for="">Nombre de la categoria</label>
+              <label for="nombre_categoria">Nombre de la categoria</label>
               <input type="text" id="nombre_categoria" name="nombre_categoria" class="form-control" required>
             </div>
           </div>
