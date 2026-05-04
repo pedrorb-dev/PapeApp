@@ -487,7 +487,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '../mnt_usuario';
+                window.location.href = '../mnt_login';
             }
         });
     }
