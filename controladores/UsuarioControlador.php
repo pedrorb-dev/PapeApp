@@ -6,16 +6,22 @@ $usuario = new Usuarios();
 
 switch($_GET["opc"]) {
     #esto es SOLO para insertar en la base de datos
-    case "guardaryeditar":
-
+    case "guardaryeditar": 
         if (empty($_POST["usuario"]) || empty($_POST["contraseña"])) {
             echo("Introduzca valores en los campos");
         } else {
-            $usuario->insert_usuario(
-                $_POST["usuario"],
-                $_POST["contraseña"],
-                "empleado"
-            );
+            $datos = $usuario -> get_usuario_name($_POST["usuario"]);
+            
+            if(count($datos) != 0) {
+                echo("No puede haber valores repetidos");
+            } else {
+                $usuario->insert_usuario(
+                    $_POST["usuario"],
+                    $_POST["contraseña"],
+                    "empleado"
+                );
+            }
+
         }
     break;
 
@@ -32,7 +38,7 @@ switch($_GET["opc"]) {
 
         if ($datos) {
              // Iniciar sesión
-            session_start();
+            session_start();    
             $_SESSION["id_usuario"] = $datos["id_usuario"];
             $_SESSION["nombre_usuario"] = $datos["nombre_usuario"];
             $_SESSION["rol"] = $datos["rol"];
@@ -44,7 +50,7 @@ switch($_GET["opc"]) {
         }
     }
     break;
-
+    
 }
 
 ?>
