@@ -21,6 +21,10 @@ function guardaryeditar(e) {
         processData: false,
         success: function (datos) {
             console.log(datos);
+            let msj = document.getElementById("msj_error2");
+                msj.innerText = datos; //para meter el mensaje de respuesta al <p>
+                msj.style.display = "block"; // mostrar
+
             $('#forma-registro')[0].reset();
 
         }
@@ -30,6 +34,7 @@ function guardaryeditar(e) {
 function ingresar(e) {
     e.preventDefault();
     var formData = new FormData($("#forma")[0]);
+
     $.ajax({
         url: "../../controladores/UsuarioControlador.php?opc=iniciarsesion",
         type: "POST",
@@ -37,20 +42,17 @@ function ingresar(e) {
         contentType: false,
         processData: false,
         success: function (respuesta) {
-            console.log("RESPUESTA:", respuesta);
+
+            let msj = document.getElementById("msj_error");
+
             if (respuesta.trim() === "ok") {
+                msj.style.display = "none";
                 window.location.href = "/PapeApp/vistas/mnt_inicio";
             } else {
-                swal.fire("Error", respuesta, "error");
+                msj.innerText = respuesta; //para meter el mensaje de respuesta al <p>
+                msj.style.display = "block"; // mostrar
             }
-
-            /*swal.fire(
-                'Registro!',
-                'El registro correctamente.',
-                'success'
-            )*/
-        },
-
+        }
     });
 }
 init();

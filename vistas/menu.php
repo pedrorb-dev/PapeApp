@@ -1,6 +1,9 @@
 <?php
 // Configuración del título dinámico
 $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
+
+     session_start();
+             
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +48,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             top: 0;
             left: 0;
             height: 100%;
-            width: 280px;
+            width: 300px;
             background-color: rgb(50, 113, 121);
             color: white;
             transition: all 0.3s ease;
@@ -54,7 +57,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
         }
 
         .sidebar.collapsed {
-            width: 80px;
+            width: 95px;
         }
 
         .sidebar-header {
@@ -65,7 +68,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
         }
 
         .sidebar-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin: 0;
             transition: all 0.3s ease;
             white-space: nowrap;
@@ -247,6 +250,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             background: white;
             border-radius: 15px;
             padding: 15px 25px;
+            margin-left:20px;
             margin-bottom: 25px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             display: flex;
@@ -287,6 +291,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             padding: 20px;
             margin-bottom: 20px;
+            margin-left:20px;
         }
 
         /* Botones */
@@ -297,6 +302,12 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             padding: 10px 20px;
             border-radius: 10px;
             transition: all 0.3s ease;
+        }
+
+        .logo{
+            width: 80px;
+            height: auto;
+            margin-right: 10px;
         }
 
         .btn-custom-primary:hover {
@@ -338,7 +349,7 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
     </button>
     
     <div class="sidebar-header">
-        <h3><i class="fas fa-store"></i> Papelería</h3>
+        <h3><img src="/PapeApp/vistas/mnt_login/img/logo_transparente.png" alt="logo" class = "logo">Papelería El Tec</h3>
     </div>
     
     <ul class="nav-menu">
@@ -397,6 +408,21 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
                 <span class="nav-text">Proveedores</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="../mnt_pedido" class="nav-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text">Pedidos</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="../mnt_pedido" class="nav-link">
+                <i class="fa-jelly-fill fa-regular fa-chart-bar"></i>
+                <span class="nav-text">Reportes</span>
+            </a>
+        </li>
+        
         
         <li class="nav-item">
             <a href="../mnt_usuario" class="nav-link">
@@ -421,7 +447,9 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
     <div class="top-bar">
         <h4 class="page-title"><?php echo $titulo_pagina; ?></h4>
         <div class="user-info">
-            <span><i class="fas fa-user"></i> <?php echo $_SESSION['nombre_usuario'] ?? 'Usuario'; ?></span>
+            <span><i class="fas fa-user"></i> <?php echo $_SESSION['nombre_usuario'] ?? 'Usuario';?></span>
+            <br>
+            <span><?php echo $_SESSION['rol'] ?? 'rol';?></span>
             <div class="user-avatar">
                 <?php echo strtoupper(substr($_SESSION['nombre_usuario'] ?? 'U', 0, 1)); ?>
             </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title> 
-    <link href = "css/estilos.css?v=2" rel="stylesheet">
+    <link href = "css/estilos.css?v=3" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -21,6 +21,7 @@
             <div id="login-form">
                 <h2>Iniciar Sesión</h2>
                 <img src="./img/usuarios.png" width="50" height="50">
+                <p class="mensaje_error" id="msj_error">Introduzca datos en los campos</p>
                 <form id="forma" method="POST">
                     <div class="elemento">
                         <i class="bi bi-person"></i>
@@ -41,6 +42,7 @@
             <div id="registro-form">
                 <h2>Registrarse</h2>
                 <img src="./img/usuarios.png" width="50" height="50">
+                <p class="mensaje_error" id="msj_error2">Introduzca datos en los campos</p>
                 <form id="forma-registro" method="POST">
                     <div class="elemento">
                         <i class="bi bi-person"></i>
@@ -93,14 +95,6 @@
             document.getElementById("btn-registrarse").style.backgroundColor= "rgb(24, 76, 82)"
         }
 
-        function validar(forma) {
-            console.log(forma);
-            const usuario = document.getElementById(`usuario-${forma}`).value
-            const password = document.getElementById(`password-${forma}`).value
-            if(usuario.length === 0 || password.length === 0) {
-                alert("error, campos vacíos")
-            }
-        }
     </script>
 
 </html>

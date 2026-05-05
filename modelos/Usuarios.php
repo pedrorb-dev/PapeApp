@@ -46,7 +46,7 @@
             $sql->execute();
         }
 
-        public function update_usuario($id_prov, $id_prod) {
+        public function update_usuario($id_usuario) {
             $conectar = parent::conectar();
             parent::set_names();
 
@@ -72,7 +72,7 @@
             $sql -> bindValue(2, $contraseña);
 
             $sql->execute();
-            $respuesta = $sql -> fetchAll();
+            $respuesta = $sql -> fetch(PDO::FETCH_ASSOC);
             return $respuesta;   
         }
 

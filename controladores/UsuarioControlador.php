@@ -33,9 +33,9 @@ switch($_GET["opc"]) {
         if ($datos) {
              // Iniciar sesión
             session_start();
-            #$_SESSION["id_usuario"] = $datos["id_usuario"];
-            #$_SESSION["nombre_usuario"] = $datos["nombre_usuario"];
-            #$_SESSION["rol"] = $datos["rol"];
+            $_SESSION["id_usuario"] = $datos["id_usuario"];
+            $_SESSION["nombre_usuario"] = $datos["nombre_usuario"];
+            $_SESSION["rol"] = $datos["rol"];
             echo "ok";
             
             exit(); 

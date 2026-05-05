@@ -13,7 +13,7 @@
         }
 
         #se piden ambos id porque la primary key de esta tabla es una clave compuesta
-        public function get_proveedor_prod_id($id_proveedor, id_producto) {
+        public function get_proveedor_prod_id($id_proveedor) {
             $conectar = parent::conectar();
             parent::set_names();
 
@@ -37,7 +37,7 @@
             $sql->execute();
         }
 
-        public function delete_proveedor_producto($id_prov, id_prod) {
+        public function delete_proveedor_producto($id_prov, $id_prod) {
             $conectar = parent::conectar();
             parent::set_names();
 
