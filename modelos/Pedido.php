@@ -24,16 +24,16 @@
             return $respuesta;
         }
 
-        public function insert_pedido($id_proveedor, $estado) {
+        public function insert_pedido($estado, $id_prov) {
             $conectar = parent::conectar();
             parent::set_names();
 
-            #solo se inserta id del proveedor y estado del pedido
+            #solo se inserta id del proveedor y estado del pedido porque los pedidos se separan por proveedodr?
             $sql = "INSERT INTO pedido(id_pedido, id_proveedor, fecha_pedido, estado) 
                         VALUES (NULL, ?, NULL, ?)";
             $sql = $conectar -> prepare($sql);
-            $sql -> bindValue(1, $id_proveedor);
-            $sql -> bindValue(2, $estado);
+            $sql -> bindValue(2, $id_prov);
+            $sql -> bindValue(3, $estado);
 
             $sql->execute();
         }
