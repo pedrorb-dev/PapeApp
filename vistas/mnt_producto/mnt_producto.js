@@ -1,67 +1,67 @@
 var tabla;
 
-function init(){
-    $("#producto-form").on("submit",function(e){
-        guardaryeditar(e);	
+function init() {
+    $("#producto-form").on("submit", function (e) {
+        guardaryeditar(e);
     });
 }
 
-$(document).ready(function(){
-    $.post("../../controladores/CategoriaControlador.php?opc=combo",function (data) {
+$(document).ready(function () {
+    $.post("../../controladores/CategoriaControlador.php?opc=combo", function (data) {
         $("#id_categoria").html(data);
     });
 
-    tabla=$('#tabla-productos').dataTable({
-		"aProcessing": true,//Activamos el procesamiento del datatables
-	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdf'
-		        ],
-        "ajax":{
+    tabla = $('#tabla-productos').dataTable({
+        "aProcessing": true,//Activamos el procesamiento del datatables
+        "aServerSide": true,//Paginación y filtrado realizados por el servidor
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdf'
+        ],
+        "ajax": {
             url: '../../controladores/ProductoControlador.php?opc=listar',
-            type : "get",
-            dataType : "json",
-            error: function(e){
-                console.log(e.responseText);	
+            type: "get",
+            dataType: "json",
+            error: function (e) {
+                console.log(e.responseText);
             }
         },
-		"bDestroy": true,
-		"responsive": true,
-		"bInfo":true,
-		"iDisplayLength": 10,//Por cada 10 registros hace una paginación
-	    "order": [[ 0, "asc" ]],//Ordenar (columna,orden)
-	    "language": {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo": true,
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+        "order": [[0, "asc"]],//Ordenar (columna,orden)
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-                "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
                 "sPrevious": "Anterior"
             },
             "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-		}
-	}).DataTable();
+        }
+    }).DataTable();
 });
 
-function guardaryeditar(e){
+function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#producto-form")[0]);
     $.ajax({
@@ -70,10 +70,10 @@ function guardaryeditar(e){
         data: formData,
         contentType: false,
         processData: false,
-        error: function(e){
-                console.log(e.responseText);	
+        error: function (e) {
+            console.log(e.responseText);
         },
-        success: function(datos){
+        success: function (datos) {
 
             $('#producto-form')[0].reset();
             $("#modalmant").modal('hide');
@@ -88,8 +88,8 @@ function guardaryeditar(e){
     });
 }
 
-function editar(id_producto){
-    $.post("../../controladores/ProductoControlador.php?opc=mostrar",{id_producto:id_producto},function (data) {
+function editar(id_producto) {
+    $.post("../../controladores/ProductoControlador.php?opc=mostrar", { id_producto: id_producto }, function (data) {
         data = JSON.parse(data);
         $('#id_producto').val(data.id_producto);
         $('#id_categoria').val(data.id_categoria).trigger('change');
@@ -105,7 +105,7 @@ function editar(id_producto){
     $('#modalmant').modal('show');
 }
 
-function eliminar(id_producto){
+function eliminar(id_producto) {
     swal.fire({
         title: 'CRUD',
         text: "Desea Eliminar el Registro?",
@@ -116,11 +116,11 @@ function eliminar(id_producto){
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post("../../controladores/ProductoControlador.php?opc=eliminar",{id_producto:id_producto},function (data) {
-                $('#tabla-productos').DataTable().ajax.reload();	    
+            $.post("../../controladores/ProductoControlador.php?opc=eliminar", { id_producto: id_producto }, function (data) {
+                $('#tabla-productos').DataTable().ajax.reload();
             });
 
-            
+
 
             swal.fire(
                 'Eliminado!',
@@ -131,16 +131,16 @@ function eliminar(id_producto){
     })
 }
 
-$(document).on("click","#add_prod", function(){
+$(document).on("click", "#add_prod", function () {
     $('#id_producto').val("");
-        $('#id_categoria').val("").trigger('change');
-        $('#nombre_producto').val("");
-        $('#descripcion').val("");
-        $('#precio').val("");
-        $('#costo').val("");
-        $('#marca').val("");
-        $('#min_stock').val("");
-        $('#stock').val("");
+    $('#id_categoria').val("").trigger('change');
+    $('#nombre_producto').val("");
+    $('#descripcion').val("");
+    $('#precio').val("");
+    $('#costo').val("");
+    $('#marca').val("");
+    $('#min_stock').val("");
+    $('#stock').val("");
 
     $('#modal-titulo').html('Agregar Registro');
     $('#modalmant').modal('show');

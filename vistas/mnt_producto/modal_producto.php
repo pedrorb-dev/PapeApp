@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
               <label for="">Precio del Producto</label>
-              <input type="text" class="form-control" name="precio" id="precio">
+              <input type="text" class="form-control" name="precio" id="precio" onkeyup="handlerChanges(this.value)">
           </div>
           <div class="form-group">
               <label for="">Costo del Producto</label>
@@ -51,9 +51,26 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" id="send" class="btn btn-primary">Enviar</button>
           </div>
         </form>
     </div>
   </div>
 </div>
+
+<script>
+  const handlerChanges = (value) => {
+    const fieldPrice = document.getElementById("precio")
+    if(isNaN(value)) {
+      
+      fieldPrice.style.borderColor = "red"
+      fieldPrice.style.borderWidth = "2px"
+      fieldPrice.style.borderStyle = "solid"
+      document.getElementById("send").setAttribute("disabled", "true")
+    } else {
+      document.getElementById("send").removeAttribute("disabled")
+      fieldPrice.style = ""
+      console.log(value)
+    }
+  }
+</script>
