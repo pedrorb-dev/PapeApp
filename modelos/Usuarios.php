@@ -23,6 +23,18 @@
             return $respuesta;     
         }
 
+        public function get_usuario_name($name_usuario){
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
+            $sql = $conectar -> prepare($sql);
+            $sql -> bindValue(1, $name_usuario);
+            $sql->execute();
+            $respuesta = $sql -> fetchAll();
+            return $respuesta;     
+        }
+
         public function insert_usuario($nombre, $contraseña, $rol) {
             $conectar = parent::conectar();
             parent::set_names();

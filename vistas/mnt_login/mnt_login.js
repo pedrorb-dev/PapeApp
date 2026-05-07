@@ -20,13 +20,14 @@ function guardaryeditar(e) {
         contentType: false,
         processData: false,
         success: function (datos) {
-            console.log(datos);
             let msj = document.getElementById("msj_error2");
+            if (datos !== "") {
                 msj.innerText = datos; //para meter el mensaje de respuesta al <p>
                 msj.style.display = "block"; // mostrar
-
+            } else {
+                msj.style.display = "none";
+            }
             $('#forma-registro')[0].reset();
-
         }
     });
 }
@@ -42,7 +43,6 @@ function ingresar(e) {
         contentType: false,
         processData: false,
         success: function (respuesta) {
-
             let msj = document.getElementById("msj_error");
 
             if (respuesta.trim() === "ok") {
