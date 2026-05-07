@@ -1,6 +1,8 @@
 <?php
     require_once("../config/Conexion.php");
     require_once("../modelos/Pedido.php");
+    require_once("../modelos/Proveedor.php");
+    require_once("../modelos/Producto.php");
 
 
     $pedido = new Pedido();
