@@ -43,6 +43,8 @@ function ingresar(e) {
         contentType: false,
         processData: false,
         success: function (respuesta) {
+            console.log(respuesta);
+
             let msj = document.getElementById("msj_error");
 
             if (respuesta.trim() === "ok") {

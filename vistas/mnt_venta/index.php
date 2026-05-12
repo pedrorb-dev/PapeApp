@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 </head>
 <body>
-    <?php $titulo_pagina = 'Ventas'; require_once("../menu.php");?>
+    <?php require_once("../auth.php");  $titulo_pagina = 'Ventas'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info  my-3" id="btn_nueva_venta">
    Nueva Venta
@@ -24,8 +24,15 @@
                         <th>Fecha</th>
                         <th>Total</th>
                         <th>Productos</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
                     </tr>
                 </thead>
                 <tbody></tbody>

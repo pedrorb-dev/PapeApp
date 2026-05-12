@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <?php $titulo_pagina = 'Productos'; require_once("../menu.php");?>
+    <?php require_once("../auth.php");  $titulo_pagina = 'Productos'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_prod">Agregar Producto</button>
         <div class="table-responsive">
@@ -34,8 +34,15 @@
                 <th>MARCA</th>
                 <th>STOCK MINIMO</th>
                 <th>EXISTENCIAS</th>
-                <th>EDITAR</th>
-                <th>ELIMINAR</th>
+                <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
             </tr>
             </thead>
             <tbody>

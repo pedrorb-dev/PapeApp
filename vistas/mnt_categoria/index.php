@@ -1,4 +1,4 @@
-<?php ?>
+<?php require_once("../auth.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,8 +29,15 @@
             <tr>
                 <th>ID</th>
                 <th>NOMBRE</th>
-                <th>EDITAR</th>
-                <th>ELIMINAR</th>
+                <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
             </tr>
             </thead>
             <tbody>

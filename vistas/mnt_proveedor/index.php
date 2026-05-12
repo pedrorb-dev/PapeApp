@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <?php $titulo_pagina = 'Proveedores'; require_once("../menu.php");?>
+    <?php require_once("../auth.php");  $titulo_pagina = 'Proveedores'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_prov">Agregar Proveedor</button>
         <div class="table-responsive">
@@ -31,8 +31,15 @@
                 <th>TELEFONO 1</th>
                 <th>TELEFONO 2</th>
                 <th>RFC</th>
-                <th>EDITAR</th>
-                <th>ELIMINAR</th>
+                <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
             </tr>
             </thead>
             <tbody>

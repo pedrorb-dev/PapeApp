@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <?php $titulo_pagina = 'Pedidos'; require_once("../menu.php");?>
+    <?php require_once("../auth.php");  $titulo_pagina = 'Pedidos'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_prod">Agregar Pedido</button>
         <div class="table-responsive">
@@ -31,7 +31,14 @@
                 <th>FECHA DEL PEDIDO</th>
                 <th>ESTADO</th>
                 <th>VER PEDIDO</th> <!--aqui dentro se listan los productos que estan en el pedido (detalle pedido)-->
-                <th>ELIMINAR</th>
+                <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
             </tr>
             </thead>
             <tbody>

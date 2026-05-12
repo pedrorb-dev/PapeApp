@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    if(isset($_SESSION["nombre_usuario"])) {
+        header("Location: ../mnt_inicio");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +39,7 @@
                         <input type="password" id="password-login" name="contraseña"  placeholder="Contraseña">
                     </div>
                     <div class="elemento">
-                        <input type="submit" value="Ingresar" name="ingresar" id="ingresar" onClick="validar('login')">
+                        <input type="submit" value="Ingresar" name="ingresar" id="ingresar">
                     </div>
                     <div class="elemento">
                         <p>No tienes un usuario aún? <a onClick="registro()">Registrate</a></p>

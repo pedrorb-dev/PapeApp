@@ -43,7 +43,7 @@ switch($_GET["opc"]) {
             $_SESSION["nombre_usuario"] = $datos["nombre_usuario"];
             $_SESSION["rol"] = $datos["rol"];
             echo "ok";
-            
+            //header("Location: ../mnt_inicio/index.php");
             exit(); 
         } else {
             echo("Verifica que tus datos estén bien");

@@ -1,8 +1,8 @@
 <?php
+
 // Configuración del título dinámico
 $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
 
-     session_start();
              
 ?>
 
@@ -430,13 +430,19 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             </a>
         </li>
         
-        
-        <li class="nav-item">
-            <a href="../mnt_usuario" class="nav-link">
-                <i class="fas fa-users"></i>
-                <span class="nav-text">Usuarios</span>
-            </a>
-        </li>
+        <!-- si es empleado no quermos que vea la info de otros emplados -->
+        <?php 
+            if($_SESSION["rol"] == "admin") {
+            ?>
+                <li class="nav-item">
+                    <a href="../mnt_usuario" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span class="nav-text">Usuarios</span>
+                    </a>
+                </li>
+            <?php
+            }
+        ?>
         
 
         
@@ -464,7 +470,6 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
     </div>
     
     <div class="card-custom">
-
 <script>
     // JavaScript para el Sidebar
     $(document).ready(function() {
@@ -522,8 +527,8 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '../mnt_login';
-            }
+            window.location.href = '../logout.php';
+        }
         });
     }
 </script>

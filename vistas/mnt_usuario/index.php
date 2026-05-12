@@ -1,4 +1,5 @@
 <?php 
+require_once("../auth.php"); 
 $titulo_pagina = 'Gestión de Usuarios';
 require_once("../menu.php"); 
 ?>
@@ -14,8 +15,15 @@ require_once("../menu.php");
                 <th>ID</th>
                 <th>Usuario</th>
                 <th>Rol</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
             </tr>
         </thead>
         <tbody>

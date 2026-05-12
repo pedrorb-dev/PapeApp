@@ -1,3 +1,9 @@
+    <?php 
+        require_once("../auth.php");
+        $titulo_pagina = 'Bienvenido'; 
+        require_once("../menu.php"); 
+    
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +12,6 @@
     <title>Inicio</title>
 </head>
 <body>
-    <?php $titulo_pagina = 'Bienvenido'; require_once("../menu.php");?>
     <h1>Holii</h1>
 </body>
 </html>

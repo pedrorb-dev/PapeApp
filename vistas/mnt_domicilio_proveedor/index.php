@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <?php $titulo_pagina = 'Domicilios de Proveedores'; require_once("../menu.php");?>
+    <?php require_once("../auth.php"); $titulo_pagina = 'Domicilios de Proveedores'; require_once("../menu.php");?>
     <div class="container">
         <button class="btn btn-info my-3" id="add_dom">Agregar Domicilio</button>
         <div class="table-responsive">
@@ -32,8 +32,15 @@
                 <th>NUMERO</th>
                 <th>COLONIA</th>
                 <th>CÓDIGO POSTAL</th>
-                <th>EDITAR</th>
-                <th>ELIMINAR</th>
+                <?php
+                    if($_SESSION["rol"] == "admin") {
+                        ?>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        <?php
+                        
+                    }
+                ?>
             </tr>
             </thead>
             <tbody>
