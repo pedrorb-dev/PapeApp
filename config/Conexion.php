@@ -3,7 +3,7 @@
         protected $dbhost;
         public function conectar() {
             try {
-                $conecto = $this ->dbhost = new PDO("mysql:host=localhost;dbname=papeleria_db", "root", "#xPedro18");
+                $conecto = $this ->dbhost = new PDO("mysql:host=localhost;dbname=papeleria_db", "root", "");
                 return $conecto;
             } catch (PDOException $e) {
                 print $e->getMessage()."<br>";

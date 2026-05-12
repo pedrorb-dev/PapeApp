@@ -14,7 +14,7 @@
             foreach($datos as $dato) {
                 $mini_array = array();
                 $mini_array[] = $dato["id_producto"];
-                $mini_array[] = $dato["id_categoria"];
+                $mini_array[] = $dato["nombre_categoria"];
                 $mini_array[] = $dato["nombre_producto"];
                 $mini_array[] = $dato["descripcion"];
                 $mini_array[] = $dato["precio"];
@@ -52,7 +52,7 @@
                 $otp = array();
                 foreach($datos as $dato) {
                     $otp["id_producto"] = $dato["id_producto"];
-                    $otp["id_categoria"] = $dato["id_categoria"];
+                    $otp["nombre_categoria"] = $dato["nombre_categoria"];
                     $otp["nombre_producto"] = $dato["nombre_producto"];
                     $otp["descripcion"] = $dato["descripcion"];
                     $otp["precio"] = $dato["precio"];

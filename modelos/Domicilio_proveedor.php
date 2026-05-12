@@ -5,7 +5,10 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM domicilio_proveedor";
+            $sql = "SELECT d.id_domicilio_proveedor, p.nombre_proveedor, d.calle, d.ciudad, d.numero,
+            d.colonia, d.codigo_postal FROM
+            domicilio_proveedor as d
+            LEFT JOIN proveedor as p ON p.id_proveedor = d.id_proveedor";
             $sql = $conectar -> prepare($sql);
             $sql->execute();
             $respuesta = $sql -> fetchAll();

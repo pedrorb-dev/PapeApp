@@ -5,9 +5,9 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM detalle_venta"
+            $sql = "SELECT * FROM detalle_venta";
             $sql = $conectar->prepare($sql);
-            $sql->exeute();
+            $sql->execute();
 
             $respuesta = $sql-> fetchAll();
 
@@ -18,10 +18,10 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM detalle_venta WHERE id_venta=?"
+            $sql = "SELECT * FROM detalle_venta WHERE id_venta=?";
             $sql = $conectar->prepare($sql);
             $sql -> bindValue(1, $id_venta);
-            $sql->exeute();
+            $sql->execute();
 
             $respuesta = $sql-> fetchAll();
             return $respuesta;
@@ -33,12 +33,12 @@
             parent::set_names();
 
             $sql = "INSERT INTO detalle_venta(                      #null para precio unitario?
-            id_detalle_venta, id_venta, id_producto, cantidad, precio) VALUES (NULL, ?, ?, ?, NULL)"
+            id_detalle_venta, id_venta, id_producto, cantidad, precio) VALUES (NULL, ?, ?, ?, NULL)";
             $sql = $conectar->prepare($sql);
             $sql -> bindValue(1, $id_venta);
             $sql -> bindValue(2, $id_prod);
             $sql -> bindValue(3, $cantidad);
-            $sql->exeute();
+            $sql->execute();
         }
 
         #no editar id_venta ni precio porque viene de prodictos
@@ -46,13 +46,13 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "UPDATE detalle_venta SET id_producto = ? , cantidad = ?, WHERE id_detalle_venta = ?"
+            $sql = "UPDATE detalle_venta SET id_producto = ? , cantidad = ?, WHERE id_detalle_venta = ?";
             $sql = $conectar->prepare($sql);
         
             $sql -> bindValue(1, $id_prod);
             $sql -> bindValue(2, $cantidad);
             $sql -> bindValue(3, $id_detalle);
-            $sql->exeute();
+            $sql->execute();
         }
 
         public function delete_detalle_venta($id_detalle){

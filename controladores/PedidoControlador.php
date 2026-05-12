@@ -6,6 +6,8 @@
 
 
     $pedido = new Pedido();
+    $producto = new Producto();
+    $proveedor = new Proveedor();
 
 
     switch($_GET["opc"]) {
@@ -18,7 +20,7 @@
                 $mini_array[] = $dato["id_pedido"];
                 $mini_array[] = $dato["id_proveedor"];
                 $mini_array[] = $dato["fecha_pedido"];
-                $mini_array[] = $dato["estado"];
+                $mini_array[] = $dato["estado"]; #reemplazar boton de editar por ver detalles
                 $mini_array[] = '<button type="button" onClick="editar('.$dato["id_producto"].');" id="'.$dato["id_producto"].'" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-edit"></i></div></button>'; 
                 $mini_array[] = '<button type="button" onClick="eliminar('.$dato["id_producto"].');" id="'.$dato["id_producto"].'" class="btn btn-outline-danger btn-icon"><div><i class="fa-solid fa-delete-left"></i></div></button>'; 
                 $data[] = $mini_array;

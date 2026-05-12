@@ -410,6 +410,13 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
         </li>
 
         <li class="nav-item">
+            <a href="../mnt_domicilio_proveedor" class="nav-link">
+                <i class="fa-regular fa-address-book"></i>
+                <span class="nav-text">Domicilio Proveedores</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a href="../mnt_pedido" class="nav-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="nav-text">Pedidos</span>

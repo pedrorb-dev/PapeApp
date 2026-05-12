@@ -39,7 +39,7 @@
             </table>
         </div>
     </div>
-    <?php require_once("modal_producto.php")?>
+    <?php require_once("modal_pedido.php")?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>

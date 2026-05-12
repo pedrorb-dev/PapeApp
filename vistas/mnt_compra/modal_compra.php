@@ -36,7 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
-                                        <th>Cant</th>
+                                        <th>Cantidad</th>
                                         <th>Costo Unit.</th>
                                         <th>Subtotal</th>
                                         <th></th>

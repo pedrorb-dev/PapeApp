@@ -4,7 +4,10 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT * FROM productos";
+            $sql = "SELECT c.nombre_categoria, p.id_producto, p.nombre_producto, p.descripcion,
+            p.precio, p.costo, p.marca, p.min_stock, p.stock FROM productos as p 
+            LEFT JOIN categoria as c
+            ON p.id_categoria = c.id_categoria";
             $sql = $conectar -> prepare($sql);
             $sql->execute();
             $respuesta = $sql -> fetchAll();
