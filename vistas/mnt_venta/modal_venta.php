@@ -2,11 +2,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Registrar Venta</h4>
+                <h4 id="modalVentaLabel">Registrar Venta</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             
             <div class="modal-body">
+                <!-- Campo oculto para edición -->
+                <input type="hidden" id="id_venta_edit" value="">
+                
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label>Buscar Producto</label>
@@ -14,7 +17,7 @@
                         <div id="resultados_busqueda" class="list-group mt-2" style="max-height: 200px; overflow-y: auto;"></div>
                     </div>
                     <div class="col-md-6">
-                        <label>Carrito de Compra</label>
+                        <label>Carrito de Venta</label>
                         <div class="table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead>
@@ -26,7 +29,13 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody id="carrito_body"></tbody>
+                                <tbody id="carrito_body">
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">
+                                            <i class="fa fa-info-circle"></i> No hay productos agregados
+                                        </td>
+                                    </tr>
+                                </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="3">TOTAL:</th>

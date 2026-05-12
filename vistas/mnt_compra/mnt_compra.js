@@ -40,13 +40,13 @@ $(document).ready(function () {
 
     // Nueva compra
     $("#btn_nueva_compra").click(function () {
+        $("#modalCompraLabel").html("Registrar Compra");
+        $("#id_compra_edit").val("");
+        $("#id_proveedor").val("");
         carrito = [];
         actualizar_carrito();
-        $("#id_proveedor").val("");
-        $("#id_compra_edit").val("");  // Limpiar campo de edición
-        $("#modalCompraLabel").html("Registrar Compra");  // Resetear título
-        $("#buscar_producto").val("");  // Limpiar búsqueda
-        $("#resultados_busqueda").html("");  // Limpiar resultados
+        $("#buscar_producto").val('');
+        $("#resultados_busqueda").html('');
         $("#modalCompra").modal('show');
     });
 
@@ -80,7 +80,7 @@ $(document).ready(function () {
         }
     });
 
-    // Guardar/Actualizar compra (UN SOLO EVENTO)
+    // Guardar compra (NUEVA o EDITADA)
     $("#btn_guardar_compra").click(function () {
         let id_compra = $("#id_compra_edit").val();
         let id_proveedor = $("#id_proveedor").val();
@@ -102,10 +102,10 @@ $(document).ready(function () {
             detalles: JSON.stringify(carrito)
         };
 
-        // Determinar si es guardar o actualizar
         let url = "../../controladores/CompraControlador.php?opc=guardar";
         let mensaje = 'Compra registrada correctamente';
 
+        // Si es edición, enviar ID y usar opc=actualizar
         if (id_compra && id_compra !== "") {
             datos.id_compra = id_compra;
             url = "../../controladores/CompraControlador.php?opc=actualizar";
@@ -129,75 +129,30 @@ $(document).ready(function () {
                     carrito = [];
                     actualizar_carrito();
                     tabla_compras.ajax.reload();
-                } else {
-                    Swal.fire('Error', 'Error al procesar la compra', 'error');
                 }
             },
             error: function (e) {
                 console.log(e.responseText);
-                Swal.fire('Error', 'Error al procesar la compra', 'error');
+                Swal.fire('Error', 'Error al guardar la compra', 'error');
             }
         });
     });
 });
 
-// Función para editar compra
-function editar(id_compra) {
-    $.post("../../controladores/CompraControlador.php?opc=obtener_para_editar",
-        { id_compra: id_compra }, function (data) {
-            let compra = JSON.parse(data);
+// ========== FUNCIONES DEL CARRITO ==========
 
-            if (compra && compra.detalles) {
-                // Limpiar carrito actual
-                carrito = [];
-
-                // Cargar proveedor
-                $("#id_proveedor").val(compra.id_proveedor);
-
-                // Cargar productos del carrito
-                compra.detalles.forEach(det => {
-                    carrito.push({
-                        id_producto: det.id_producto,
-                        nombre_producto: det.nombre_producto,
-                        cantidad: det.cantidad,
-                        costo_unitario: parseFloat(det.costo_unitario),
-                        subtotal: det.cantidad * parseFloat(det.costo_unitario)
-                    });
-                });
-
-                // Actualizar vista del carrito
-                actualizar_carrito();
-
-                // Guardar ID de compra en el campo hidden
-                $("#id_compra_edit").val(compra.id_compra);
-
-                // Cambiar título del modal
-                $("#modalCompraLabel").html("Editar Compra");
-
-                // Limpiar búsqueda
-                $("#buscar_producto").val("");
-                $("#resultados_busqueda").html("");
-
-                // Mostrar modal
-                $("#modalCompra").modal('show');
-            } else {
-                Swal.fire('Error', 'No se pudo cargar la compra', 'error');
-            }
-        });
-}
-
-function agregar_al_carrito(id, nombre, costo) {
+function agregar_al_carrito(id, nombre, costo, cantidad = 1) {
     let existe = carrito.find(item => item.id_producto === id);
     if (existe) {
-        existe.cantidad++;
+        existe.cantidad += cantidad;
         existe.subtotal = existe.cantidad * existe.costo_unitario;
     } else {
         carrito.push({
             id_producto: id,
             nombre_producto: nombre,
-            cantidad: 1,
+            cantidad: cantidad,
             costo_unitario: costo,
-            subtotal: costo
+            subtotal: costo * cantidad
         });
     }
     actualizar_carrito();
@@ -208,29 +163,25 @@ function agregar_al_carrito(id, nombre, costo) {
 function actualizar_carrito() {
     let html = "";
     if (carrito.length === 0) {
-        html = `<tr>
-                    <td colspan="5" class="text-center text-muted">
-                        <i class="fa fa-info-circle"></i> No hay productos agregados
-                    </td>
-                </tr>`;
+        html = `<tr><td colspan="5" class="text-center text-muted">No hay productos agregados</td></tr>`;
     } else {
         carrito.forEach((item, index) => {
             html += `<tr>
-                          <td>${item.nombre_producto}</td>
-                          <td>
-                              <input type="number" class="form-control form-control-sm" 
-                                     value="${item.cantidad}" 
-                                     onchange="actualizar_cantidad(${index}, this.value)"
-                                     style="width: 70px" min="1">
-                          </td>
-                          <td>$${parseFloat(item.costo_unitario).toFixed(2)}</td>
-                          <td>$${parseFloat(item.subtotal).toFixed(2)}</td>
-                          <td>
-                              <button class="btn btn-danger btn-sm" onclick="eliminar_del_carrito(${index})">
-                                  <i class="fa fa-trash"></i>
-                              </button>
-                          </td>
-                      </tr>`;
+                        <td>${item.nombre_producto}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" 
+                                   value="${item.cantidad}" 
+                                   onchange="actualizar_cantidad(${index}, this.value)"
+                                   style="width: 70px" min="1">
+                        </td>
+                        <td>$${item.costo_unitario}</td>
+                        <td>$${item.subtotal}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="eliminar_del_carrito(${index})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>`;
         });
     }
     $("#carrito_body").html(html);
@@ -259,6 +210,40 @@ function eliminar_del_carrito(index) {
     actualizar_carrito();
 }
 
+// ========== EDITAR COMPRA (SIN ELIMINAR) ==========
+function editar(id_compra) {
+    $.post("../../controladores/CompraControlador.php?opc=obtener_para_editar",
+        { id_compra: id_compra }, function (data) {
+            let compra = JSON.parse(data);
+
+            if (compra && compra.detalles) {
+                // Limpiar carrito
+                carrito = [];
+
+                // Cargar proveedor
+                $("#id_proveedor").val(compra.id_proveedor);
+
+                // Cargar productos al carrito
+                compra.detalles.forEach(det => {
+                    agregar_al_carrito(
+                        det.id_producto,
+                        det.nombre_producto,
+                        parseFloat(det.costo_unitario),
+                        parseInt(det.cantidad)
+                    );
+                });
+
+                // Guardar ID para usarlo al guardar
+                $("#id_compra_edit").val(compra.id_compra);
+                $("#modalCompraLabel").html("Editar Compra");
+                $("#modalCompra").modal('show');
+            } else {
+                Swal.fire('Error', 'No se pudo cargar la compra', 'error');
+            }
+        });
+}
+
+// ========== VER DETALLE ==========
 function ver_detalle(id_compra) {
     $.post("../../controladores/CompraControlador.php?opc=mostrar",
         { id_compra: id_compra }, function (data) {
@@ -307,6 +292,7 @@ function ver_detalle(id_compra) {
         });
 }
 
+// ========== ELIMINAR COMPRA ==========
 function eliminar(id_compra) {
     Swal.fire({
         title: '¿Eliminar compra?',

@@ -51,7 +51,17 @@ switch($_GET["opc"]) {
         $venta->delete_venta_id($_POST["id_venta"]);
         echo json_encode(array("success" => true));
         break;
-    
+    case "actualizar":
+        $id_venta = $_POST["id_venta"];
+        $total_venta = $_POST["total_venta"];
+        $detalles = json_decode($_POST["detalles"], true);
+
+        // Primero eliminar la venta original (revirtiendo stock)
+        $venta->delete_venta_id($id_venta);
+        // Luego insertar la nueva venta
+        $nuevo_id = $venta->insert_venta(date('Y-m-d H:i:s'), $total_venta, $detalles);
+        echo json_encode(array("success" => true, "id_venta" => $nuevo_id));
+        break;
     case "buscar_productos":
         $buscar = $_POST["buscar"];
         $datos = $producto->get_producto();

@@ -63,7 +63,25 @@ switch($_GET["opc"]) {
         }
         echo $html;
         break;
-    
+    case "obtener_para_editar":
+        $id_compra = $_POST["id_compra"];
+        $datos = $compra->get_compra_with_details($id_compra);
+        echo json_encode($datos);
+        break;
+
+    case "actualizar":
+        $id_compra = $_POST["id_compra"];
+        $id_proveedor = $_POST["id_proveedor"];
+        $detalles = json_decode($_POST["detalles"], true);
+        
+        // Primero eliminar la compra original (revertir stock)
+        $compra->delete_compra_id($id_compra);
+        
+        // Luego insertar la nueva compra
+        $nuevo_id = $compra->insert_compra($id_proveedor, date('Y-m-d H:i:s'), $_POST["total_compra"], $detalles);
+        
+        echo json_encode(array("success" => true, "id_compra" => $nuevo_id));
+        break;
     case "buscar_productos":
         $buscar = $_POST["buscar"];
         $datos = $producto->get_producto();

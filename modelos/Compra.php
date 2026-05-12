@@ -84,7 +84,51 @@ class Compra extends Conexion {
             throw $e;
         }
     }
-    
+    public function get_compra_with_details($id_compra) {
+        $conectar = parent::conectar();
+        parent::set_names();
+        
+        $sql = "SELECT c.*, p.nombre_proveedor,
+                    dc.id_detalle_compra, dc.id_producto, dc.cantidad, dc.costo_unitario,
+                    prod.nombre_producto, prod.marca, prod.precio
+                FROM compra c
+                LEFT JOIN proveedor p ON c.id_proveedor = p.id_proveedor
+                LEFT JOIN detalle_compra dc ON c.id_compra = dc.id_compra
+                LEFT JOIN productos prod ON dc.id_producto = prod.id_producto
+                WHERE c.id_compra = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $id_compra);
+        $sql->execute();
+        
+        $resultado = $sql->fetchAll();
+        
+        if(count($resultado) > 0) {
+            $compra = array(
+                'id_compra' => $resultado[0]['id_compra'],
+                'id_proveedor' => $resultado[0]['id_proveedor'],
+                'nombre_proveedor' => $resultado[0]['nombre_proveedor'],
+                'fecha_compra' => $resultado[0]['fecha_compra'],
+                'total_compra' => $resultado[0]['total_compra'],
+                'detalles' => array()
+            );
+            
+            foreach($resultado as $row) {
+                if($row['id_producto']) {
+                    $compra['detalles'][] = array(
+                        'id_detalle_compra' => $row['id_detalle_compra'],
+                        'id_producto' => $row['id_producto'],
+                        'nombre_producto' => $row['nombre_producto'],
+                        'cantidad' => $row['cantidad'],
+                        'costo_unitario' => $row['costo_unitario'],
+                        'marca' => $row['marca'],
+                        'precio_venta' => $row['precio']
+                    );
+                }
+            }
+            return $compra;
+        }
+        return null;
+    }
     // Eliminar compra (revertir stock)
     public function delete_compra_id($id_compra) {
         $conectar = parent::conectar();
@@ -197,54 +241,6 @@ class Compra extends Conexion {
         }
     }
 
-    // Método para obtener compra con sus detalles (para editar)
-    public function get_compra_with_details($id_compra) {
-        $conectar = parent::conectar();
-        parent::set_names();
-        
-        $sql = "SELECT c.*, p.nombre_proveedor,
-                    dc.id_detalle_compra, dc.id_producto, dc.cantidad, dc.costo_unitario,
-                    prod.nombre_producto, prod.marca, prod.precio
-                FROM compra c
-                LEFT JOIN proveedor p ON c.id_proveedor = p.id_proveedor
-                LEFT JOIN detalle_compra dc ON c.id_compra = dc.id_compra
-                LEFT JOIN productos prod ON dc.id_producto = prod.id_producto
-                WHERE c.id_compra = ?";
-        $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $id_compra);
-        $sql->execute();
-        
-        $resultado = $sql->fetchAll();
-        
-        if(count($resultado) > 0) {
-            $compra = array(
-                'id_compra' => $resultado[0]['id_compra'],
-                'id_proveedor' => $resultado[0]['id_proveedor'],
-                'nombre_proveedor' => $resultado[0]['nombre_proveedor'],
-                'fecha_compra' => $resultado[0]['fecha_compra'],
-                'total_compra' => $resultado[0]['total_compra'],
-                'detalles' => array()
-            );
-            
-            foreach($resultado as $row) {
-                if($row['id_producto']) {
-                    $compra['detalles'][] = array(
-                        'id_detalle_compra' => $row['id_detalle_compra'],
-                        'id_producto' => $row['id_producto'],
-                        'nombre_producto' => $row['nombre_producto'],
-                        'cantidad' => $row['cantidad'],
-                        'costo_unitario' => $row['costo_unitario'],
-                        'marca' => $row['marca'],
-                        'precio_venta' => $row['precio']
-                    );
-                }
-            }
-            
-            return $compra;
-        }
-        
-        return null;
-    }
     
 }
 ?>

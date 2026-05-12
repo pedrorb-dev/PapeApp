@@ -35,8 +35,12 @@ $(document).ready(function () {
 
     // Nueva venta
     $("#btn_nueva_venta").click(function () {
+        $("#modalVentaLabel").html("Registrar Venta");
+        $("#id_venta_edit").val("");
         carrito = [];
         actualizar_carrito();
+        $("#buscar_producto").val('');
+        $("#resultados_busqueda").html('');
         $("#modalVenta").modal('show');
     });
 
@@ -59,8 +63,10 @@ $(document).ready(function () {
         }
     });
 
-    // Guardar venta
+    // Guardar venta (NUEVA o EDITADA)
     $("#btn_guardar_venta").click(function () {
+        let id_venta = $("#id_venta_edit").val();
+
         if (carrito.length === 0) {
             Swal.fire('Error', 'Agregue al menos un producto', 'error');
             return;
@@ -72,17 +78,29 @@ $(document).ready(function () {
             detalles: JSON.stringify(carrito)
         };
 
+        let url = "../../controladores/VentaControlador.php?opc=guardar";
+        let mensaje = 'Venta registrada correctamente';
+
+        // Si es edición, enviar id y usar opc=actualizar
+        if (id_venta && id_venta !== "") {
+            datos.id_venta = id_venta;
+            url = "../../controladores/VentaControlador.php?opc=actualizar";
+            mensaje = 'Venta actualizada correctamente';
+        }
+
         $.ajax({
-            url: "../../controladores/VentaControlador.php?opc=guardar",
+            url: url,
             type: "POST",
             data: datos,
             success: function (response) {
                 let res = JSON.parse(response);
                 if (res.success) {
-                    Swal.fire('Éxito', 'Venta registrada correctamente', 'success');
+                    Swal.fire('Éxito', mensaje, 'success');
                     $("#modalVenta").modal('hide');
                     $("#buscar_producto").val('');
                     $("#resultados_busqueda").html('');
+                    $("#id_venta_edit").val('');
+                    $("#modalVentaLabel").html("Registrar Venta");
                     carrito = [];
                     actualizar_carrito();
                     tabla_ventas.ajax.reload();
@@ -96,11 +114,13 @@ $(document).ready(function () {
     });
 });
 
+// ========== FUNCIONES DEL CARRITO ==========
+
 function agregar_al_carrito(id, nombre, precio, cantidad = 1) {
     let existe = carrito.find(item => item.id_producto === id);
 
     if (existe) {
-        existe.cantidad += cantidad;  // Suma la cantidad
+        existe.cantidad += cantidad;
         existe.subtotal = existe.cantidad * existe.precio_unitario;
     } else {
         carrito.push({
@@ -112,28 +132,34 @@ function agregar_al_carrito(id, nombre, precio, cantidad = 1) {
         });
     }
     actualizar_carrito();
+    $("#buscar_producto").val('');
+    $("#resultados_busqueda").html('');
 }
 
 function actualizar_carrito() {
     let html = "";
-    carrito.forEach((item, index) => {
-        html += `<tr>
-                    <td>${item.nombre_producto}</td>
-                    <td>
-                        <input type="number" class="form-control form-control-sm" 
-                               value="${item.cantidad}" 
-                               onchange="actualizar_cantidad(${index}, this.value)"
-                               style="width: 70px">
-                    </td>
-                    <td>$${item.precio_unitario}</td>
-                    <td>$${item.subtotal}</td>
-                    <td>
-                        <button class="btn btn-danger btn-sm" onclick="eliminar_del_carrito(${index})">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>`;
-    });
+    if (carrito.length === 0) {
+        html = `<tr><td colspan="5" class="text-center text-muted">No hay productos agregados</td></tr>`;
+    } else {
+        carrito.forEach((item, index) => {
+            html += `<tr>
+                        <td>${item.nombre_producto}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" 
+                                   value="${item.cantidad}" 
+                                   onchange="actualizar_cantidad(${index}, this.value)"
+                                   style="width: 70px" min="1">
+                        </td>
+                        <td>$${item.precio_unitario}</td>
+                        <td>$${item.subtotal}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="eliminar_del_carrito(${index})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>`;
+        });
+    }
     $("#carrito_body").html(html);
     $("#total_venta").html("$" + calcular_total());
 }
@@ -160,31 +186,30 @@ function eliminar_del_carrito(index) {
 }
 
 function editar_venta(id_venta) {
-    // 1. Obtener los detalles de la venta original
+    // Solo cargar datos, NO eliminar
     $.post("../../controladores/VentaControlador.php?opc=mostrar",
         { id_venta: id_venta }, function (data) {
             let detalles = JSON.parse(data);
 
-            // 2. Eliminar la venta original
-            $.post("../../controladores/VentaControlador.php?opc=eliminar",
-                { id_venta: id_venta }, function () {
+            // Limpiar carrito
+            carrito = [];
 
-                    // 3. Cargar los productos al carrito
-                    carrito = [];
-                    detalles.forEach(det => {
-                        if (det.id_producto) {
-                            agregar_al_carrito(
-                                det.id_producto,
-                                det.nombre_producto,
-                                det.precio_unitario,
-                                det.cantidad  // Cantidad original
-                            );
-                        }
-                    });
+            // Cargar productos al carrito
+            detalles.forEach(det => {
+                if (det.id_producto) {
+                    agregar_al_carrito(
+                        det.id_producto,
+                        det.nombre_producto,
+                        parseFloat(det.precio_unitario),
+                        parseInt(det.cantidad)
+                    );
+                }
+            });
 
-                    // 4. Abrir modal para editar
-                    $("#modalVenta").modal('show');
-                });
+            // Guardar ID para usarlo al guardar
+            $("#id_venta_edit").val(id_venta);
+            $("#modalVentaLabel").html("Editar Venta");
+            $("#modalVenta").modal('show');
         });
 }
 

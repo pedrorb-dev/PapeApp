@@ -42,7 +42,13 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody id="carrito_body"></tbody>
+                                <tbody id="carrito_body">
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">
+                                            <i class="fa fa-info-circle"></i> No hay productos agregados
+                                        </td>
+                                    </tr>
+                                </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="3">TOTAL:</th>
