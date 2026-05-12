@@ -1,5 +1,9 @@
 <?php 
 require_once("../auth.php"); 
+if($_SESSION["rol"] == "empleado") {
+    header("Location: ../mnt_inicio");
+    exit();
+}
 $titulo_pagina = 'Gestión de Usuarios';
 require_once("../menu.php"); 
 ?>

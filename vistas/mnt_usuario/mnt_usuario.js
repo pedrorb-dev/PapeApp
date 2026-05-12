@@ -107,14 +107,8 @@ function eliminar(id_usuario) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.post("../../controladores/UsuarioControlador.php?opc=eliminar",
-                { id_usuario: id_usuario }, function (response) {
-                    let res = JSON.parse(response);
-                    if (res.success) {
-                        Swal.fire('Eliminado', 'Usuario eliminado', 'success');
-                        tabla_usuarios.ajax.reload();
-                    } else {
-                        Swal.fire('Error', 'No se pudo eliminar', 'error');
-                    }
+                { id_usuario: id_usuario }, function () {
+                    tabla_usuarios.ajax.reload();
                 });
         }
     });

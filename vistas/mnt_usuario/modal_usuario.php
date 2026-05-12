@@ -11,12 +11,12 @@
                 
                 <div class="mb-3">
                     <label class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="nombre_usuario" placeholder="Nombre de usuario">
+                    <input type="text" class="form-control" name = "nombre_usuario" id="nombre_usuario" placeholder="Nombre de usuario">
                 </div>
                 
                 <div class="mb-3">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
+                    <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Contraseña">
                     <small class="text-muted" id="pass_help">Dejar en blanco para no cambiar</small>
                 </div>
                 
