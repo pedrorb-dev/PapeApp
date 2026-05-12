@@ -26,7 +26,7 @@
             <thead>
             <tr>
                 <th>ID PRODUCTO</th>
-                <th>ID CATEGORIA</th>
+                <th>CATEGORIA</th>
                 <th>NOMBRE</th>
                 <th>DESCRIPCION</th>
                 <th>PRECIO</th>

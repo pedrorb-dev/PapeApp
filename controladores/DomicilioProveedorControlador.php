@@ -15,7 +15,7 @@
                 $mini_array = array();
 
                 $mini_array[] = $dato["id_domicilio_proveedor"];
-                $mini_array[] = $dato["id_proveedor"];  
+                $mini_array[] = $dato["nombre_proveedor"];  
                 $mini_array[] = $dato["calle"];    
                 $mini_array[] = $dato["ciudad"];    
                 $mini_array[] = $dato["numero"];   
@@ -51,7 +51,7 @@
                 $otp = array();
                 foreach($datos as $dato) {
                     $otp["id_domicilio_proveedor"] = $dato["id_domicilio_proveedor"];
-                    $otp["id_proveedor"] = $dato["id_proveedor"];
+                    $otp["nombre_proveedor"] = $dato["nombre_proveedor"];
                     $otp["calle"] = $dato["calle"];
                     $otp["ciudad"] = $dato["ciudad"];
                     $otp["numero"] = $dato["numero"];

@@ -34,7 +34,7 @@
           </div>
           <div class="form-group">
               <label for="">Costo del Producto</label>
-              <input type="text" class="form-control" name="costo" id="costo">
+              <input type="text" class="form-control" name="costo" id="costo" onkeyup="handlerChanges2(this.value)">
           </div>
           <div class="form-group">
               <label for="">Marca del Producto</label>
@@ -60,16 +60,32 @@
 
 <script>
   const handlerChanges = (value) => {
-    const fieldPrice = document.getElementById("precio")
+    const fieldPrice = document.getElementById("precio");
     if(isNaN(value)) {
       
       fieldPrice.style.borderColor = "red"
       fieldPrice.style.borderWidth = "2px"
       fieldPrice.style.borderStyle = "solid"
+
       document.getElementById("send").setAttribute("disabled", "true")
     } else {
       document.getElementById("send").removeAttribute("disabled")
-      fieldPrice.style = ""
+      fieldPrice.style = "";
+      console.log(value)
+    }
+  }
+
+  const handlerChanges2 = (value) => {
+    const fieldCost = document.getElementById("costo");
+    if(isNaN(value)) {
+      
+      fieldCost.style.borderColor = "red"
+      fieldCost.style.borderWidth = "2px"
+      fieldCost.style.borderStyle = "solid"
+      document.getElementById("send").setAttribute("disabled", "true")
+    } else {
+      document.getElementById("send").removeAttribute("disabled")
+      fieldCost.style = "";
       console.log(value)
     }
   }

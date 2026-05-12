@@ -36,7 +36,7 @@
             id_compra, 
             id_producto, 
             cantidad, 
-            costo_unitario) VALUES (NULL,? , ? ,?, NULL)" #el costo unitario se llena por automático
+            costo_unitario) VALUES (NULL,? , ? ,?, NULL)"; #el costo unitario se llena por automático
 
         }
 
@@ -52,7 +52,7 @@
         }
 
         #editar por si hubiera un error, costo no se edita, el id de detalle se necesita para saber cual se edita
-        public function update_detalle_compra($id_detalle, $id_producto,  $id_cantidad){
+        public function update_detalle_compra($id_detalle, $id_producto,  $cantidad){
             $conectar = parent::conectar();
             parent::set_names();
             #null en los campos que no se pueden editar?

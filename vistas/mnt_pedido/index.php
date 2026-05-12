@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Pedidos</title>
     <!-- ICONOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -18,21 +18,19 @@
 
 </head>
 <body>
-    <?php $titulo_pagina = 'Domicilios de Proveedores'; require_once("../menu.php");?>
+    <?php $titulo_pagina = 'Pedidos'; require_once("../menu.php");?>
     <div class="container">
-        <button class="btn btn-info my-3" id="add_dom">Agregar Domicilio</button>
+        <button class="btn btn-info my-3" id="add_prod">Agregar Pedido</button>
         <div class="table-responsive">
-            <table id="tabla-domicilios" class="table table-striped table-bordered" style="width:100%">
+            <table id="tabla-productos" class="table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
-                <th>ID DOMICILIO</th>
-                <th>PROVEEDOR</th>
-                <th>CALLE</th>
-                <th>CIUDAD</th>
-                <th>NUMERO</th>
-                <th>COLONIA</th>
-                <th>CÓDIGO POSTAL</th>
-                <th>EDITAR</th>
+                <th>ID PEDIDO</th>
+                <th>PROVEEDOR</th> <!--aquí mostrar el nombre del proveedor en lugar del id-->
+                <th>NOMBRE</th>
+                <th>FECHA DEL PEDIDO</th>
+                <th>ESTADO</th>
+                <th>VER PEDIDO</th> <!--aqui dentro se listan los productos que estan en el pedido (detalle pedido)-->
                 <th>ELIMINAR</th>
             </tr>
             </thead>
@@ -41,7 +39,7 @@
             </table>
         </div>
     </div>
-    <?php require_once("modal_domicilio.php")?>
+    <?php require_once("modal_pedido.php")?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -55,6 +53,6 @@
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="mnt_domicilio.js"></script>
+    <script src="mnt_producto.js"></script>
 </body>
 </html>
