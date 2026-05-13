@@ -6,7 +6,6 @@
                 $conecto = $this ->dbhost = new PDO("mysql:host=localhost;dbname=papeleria_db", "root", "#xPedro18");
                 return $conecto;
             } catch (PDOException $e) {
-                print $e->getMessage()."<br>";
                 die();
             }
         }

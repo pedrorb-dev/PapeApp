@@ -53,10 +53,12 @@ $(document).ready(function () {
                     let productos = JSON.parse(data);
                     let html = "";
                     productos.forEach(prod => {
-                        html += `<a href="#" class="list-group-item list-group-item-action" 
-                                    onclick="agregar_al_carrito(${prod.id_producto}, '${prod.nombre_producto}', ${prod.precio})">
-                                    ${prod.nombre_producto} - $${prod.precio} (Stock: ${prod.stock})
-                                </a>`;
+                        if (prod.stock > 0) {
+                            html += `<a class="list-group-item list-group-item-action" 
+                                        onclick="agregar_al_carrito(${prod.id_producto}, '${prod.nombre_producto}', ${prod.precio}, ${1}, ${prod.stock})">
+                                        ${prod.nombre_producto} - $${prod.precio} (Stock: ${prod.stock})
+                                    </a>`;
+                        }
                     });
                     $("#resultados_busqueda").html(html);
                 });
@@ -116,7 +118,7 @@ $(document).ready(function () {
 
 // ========== FUNCIONES DEL CARRITO ==========
 
-function agregar_al_carrito(id, nombre, precio, cantidad = 1) {
+function agregar_al_carrito(id, nombre, precio, cantidad = 1, stock) {
     let existe = carrito.find(item => item.id_producto === id);
 
     if (existe) {
@@ -128,7 +130,8 @@ function agregar_al_carrito(id, nombre, precio, cantidad = 1) {
             nombre_producto: nombre,
             cantidad: cantidad,
             precio_unitario: precio,
-            subtotal: precio * cantidad
+            subtotal: precio * cantidad,
+            stock: stock,
         });
     }
     actualizar_carrito();
@@ -147,6 +150,7 @@ function actualizar_carrito() {
                         <td>
                             <input type="number" class="form-control form-control-sm" 
                                    value="${item.cantidad}" 
+                                   id="cantidad"
                                    onchange="actualizar_cantidad(${index}, this.value)"
                                    style="width: 70px" min="1">
                         </td>
@@ -171,13 +175,20 @@ function calcular_total() {
 }
 
 function actualizar_cantidad(index, nueva_cantidad) {
-    if (nueva_cantidad <= 0) {
-        eliminar_del_carrito(index);
-    } else {
-        carrito[index].cantidad = parseInt(nueva_cantidad);
-        carrito[index].subtotal = carrito[index].cantidad * carrito[index].precio_unitario;
+    if (nueva_cantidad > carrito[index].stock) {
+        carrito[index].cantidad = carrito[index].stock
         actualizar_carrito();
+    } else {
+
+        if (nueva_cantidad <= 0) {
+            eliminar_del_carrito(index);
+        } else {
+            carrito[index].cantidad = parseInt(nueva_cantidad);
+            carrito[index].subtotal = carrito[index].cantidad * carrito[index].precio_unitario;
+            actualizar_carrito();
+        }
     }
+
 }
 
 function eliminar_del_carrito(index) {

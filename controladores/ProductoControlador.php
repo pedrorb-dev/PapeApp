@@ -52,7 +52,7 @@
                 $otp = array();
                 foreach($datos as $dato) {
                     $otp["id_producto"] = $dato["id_producto"];
-                    $otp["nombre_categoria"] = $dato["nombre_categoria"];
+                    $otp["id_categoria"] = $dato["id_categoria"];
                     $otp["nombre_producto"] = $dato["nombre_producto"];
                     $otp["descripcion"] = $dato["descripcion"];
                     $otp["precio"] = $dato["precio"];
