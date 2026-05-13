@@ -422,13 +422,6 @@ $titulo_pagina = $titulo_pagina ?? 'Sistema de Papelería';
                 <span class="nav-text">Pedidos</span>
             </a>
         </li>
-
-        <li class="nav-item">
-            <a href="../mnt_pedido" class="nav-link">
-                <i class="fa-jelly-fill fa-regular fa-chart-bar"></i>
-                <span class="nav-text">Reportes</span>
-            </a>
-        </li>
         
         <!-- si es empleado no quermos que vea la info de otros emplados -->
         <?php 

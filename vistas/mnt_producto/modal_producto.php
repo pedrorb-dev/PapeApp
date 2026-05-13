@@ -16,11 +16,11 @@
             <input type="hidden" name="id_producto" id="id_producto">
             <div class="form-group">
               <label for="">Categoria</label>
-              <select class="form-control" name="id_categoria" id="id_categoria" data-placeholder="Seleccione"></select>
+              <select required class="form-control" name="id_categoria" id="id_categoria" data-placeholder="Seleccione"></select>
             </div>
             <div class="form-group">
               <label for="">Nombre del Producto</label>
-              <input type="text" class="form-control" name="nombre_producto" id="nombre_producto">
+              <input required type="text" class="form-control" name="nombre_producto" id="nombre_producto">
             </div>
             <div class="form-group">
               <label for="">Descripcion del Producto</label>
@@ -30,28 +30,28 @@
             </div>
             <div class="form-group">
               <label for="">Precio del Producto</label>
-              <input type="text" class="form-control" name="precio" id="precio" onkeyup="handlerChanges(this.value)">
+              <input required type="text" class="form-control" name="precio" id="precio" onkeyup="handlerChanges(this.value, 'precio')">
           </div>
           <div class="form-group">
               <label for="">Costo del Producto</label>
-              <input type="text" class="form-control" name="costo" id="costo" onkeyup="handlerChanges2(this.value)">
+              <input required type="text" class="form-control" name="costo" id="costo" onkeyup="handlerChanges(this.value, 'costo')">
           </div>
           <div class="form-group">
               <label for="">Marca del Producto</label>
-              <input type="text" class="form-control" name="marca" id="marca">
+              <input required type="text" class="form-control" name="marca" id="marca">
           </div>
           <div class="form-group">
               <label for="">Stock Minimo</label>
-              <input type="text" class="form-control" name="min_stock" id="min_stock">
+              <input required type="text" class="form-control" name="min_stock" id="min_stock">
           </div>
           <div class="form-group">
               <label for="">Existencias</label>
-              <input type="text" class="form-control" name="stock" id="stock">
+              <input required type="text" class="form-control" name="stock" id="stock">
           </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" id="send" class="btn btn-primary">Enviar</button>
+            <button type="submit" id="send" class="btn btn-primary" onclick="validate()">Enviar</button>
           </div>
         </form>
     </div>
@@ -59,34 +59,30 @@
 </div>
 
 <script>
-  const handlerChanges = (value) => {
-    const fieldPrice = document.getElementById("precio");
-    if(isNaN(value)) {
+  const handlerChanges = (value, id) => {
+    const field = document.getElementById(`${id}`);
+    if(isNaN(value) || value === undefined) {
       
-      fieldPrice.style.borderColor = "red"
-      fieldPrice.style.borderWidth = "2px"
-      fieldPrice.style.borderStyle = "solid"
+      field.style.borderColor = "red"
+      field.style.borderWidth = "2px"
+      field.style.borderStyle = "solid"
 
       document.getElementById("send").setAttribute("disabled", "true")
     } else {
       document.getElementById("send").removeAttribute("disabled")
-      fieldPrice.style = "";
-      console.log(value)
+      field.style = "";
     }
   }
 
-  const handlerChanges2 = (value) => {
-    const fieldCost = document.getElementById("costo");
-    if(isNaN(value)) {
-      
-      fieldCost.style.borderColor = "red"
-      fieldCost.style.borderWidth = "2px"
-      fieldCost.style.borderStyle = "solid"
+  const validate = () => {
+    const fieldPrice = document.getElementById("precio").value;
+    const fieldCost = document.getElementById("costo").value;
+  
+    if(Number(fieldCost) > Number(fieldPrice)) {
+      alert("El precio debe ser mayor al costo")
       document.getElementById("send").setAttribute("disabled", "true")
     } else {
       document.getElementById("send").removeAttribute("disabled")
-      fieldCost.style = "";
-      console.log(value)
     }
   }
 </script>
