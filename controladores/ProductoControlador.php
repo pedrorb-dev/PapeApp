@@ -1,12 +1,12 @@
 <?php
     require_once(__DIR__ . "/../config/Conexion.php");
-    require_once(__DIR__ . "/../modelos/Producto.php");
+    require_once(__DIR__ .  "/../modelos/Producto.php");
 
 
     $producto = new Producto();
+    $opc = isset($_GET["opc"]) ? $_GET["opc"] : '';
 
-
-    switch(isset($_GET["opc"])) {
+    switch($opc) {
         case "listar":
             $datos=$producto->get_producto();
             $data=Array();
@@ -68,16 +68,16 @@
             break;
 
         case "mostrar_faltantes":
-             $datos=$producto->get_productos_faltantes();
+            $datos=$producto->get_productos_faltantes();
             $data=Array();
 
             foreach($datos as $dato) {
-                $mini_array = array();
-                $mini_array[] = $dato["nombre_producto"];
-                $mini_array[] = $dato["stock"];
-                $mini_array[] = $dato["stock_min"];
-                $mini_array[] = '<button type="button" class="btn btn-outline-primary btn-icon"><div>Agregar a pedido</div></button>'; 
-                $data[] = $mini_array;
+                $minion_array = array();
+                $minion_array[] = $dato["nombre_producto"];
+                $minion_array[] = $dato["stock"];
+                $minion_array[] = $dato["min_stock"];
+                $minion_array[] = '<button type="button" class="btn btn-outline-primary btn-icon"><div>Agregar a pedido</div></button>'; 
+                $data[] = $minion_array;
             }
 
              $respuesta = array(

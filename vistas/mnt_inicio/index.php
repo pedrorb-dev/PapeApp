@@ -110,7 +110,7 @@
                         echo $bajo_stock["total"];
                         ?>
                         </p>
-                        <button type="button" class="btn btn-primary" id="btn_bajo_stock">Ver productos</button>
+                        <button type="submit" class="btn btn-primary" id="btn_bajo_stock">Ver productos</button>
                     
                 </div>
                 <div>
