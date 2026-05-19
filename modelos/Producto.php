@@ -81,5 +81,45 @@
             $sql -> bindValue(9, $id_prod);
             $sql->execute();
         }
+
+        public function get_productos_faltantes(){
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "SELECT nombre_producto, stock, stock_min FROM productos WHERE stock <= stock_min";
+            $sql = $conectar -> prepare($sql);
+            $sql->execute();
+            $respuesta = $sql -> fetchAll();
+            return $respuesta;
+        }
+
+        public function get_productos_bajo_stock()
+        {
+
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "SELECT COUNT(*) AS total
+                FROM productos
+                WHERE stock <= min_stock";
+
+            $sql = $conectar->prepare($sql);
+            $sql->execute();
+
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function get_total_productos(){
+            $conectar = parent::conectar();
+            parent::set_names();
+
+            $sql = "SELECT COUNT(*) AS total_productos
+                FROM productos";
+
+            $sql = $conectar->prepare($sql);
+            $sql->execute();
+
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        }
     }
 ?>

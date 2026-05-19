@@ -24,7 +24,68 @@ $(document).ready(function () {
         $("#top_fecha_fin").val('');
         cargarTopProductos();
     });
+
+    $("#btn_bajo_stock").click(function(){
+         console.log("click");
+    $("#modalBajoStock").modal("show");
+
 });
+
+$.post("../../controladores/ProductoControlador.php?opc=mostrar_faltantes", function (data) {
+        $("#id_producto").html(data);
+    });
+
+    tabla = $('#tabla-productos').dataTable({
+        "aProcessing": true,//Activamos el procesamiento del datatables
+        "aServerSide": true,//Paginación y filtrado realizados por el servidor
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdf'
+        ],
+        "ajax": {
+            url: '../../controladores/ProductoControlador.php?opc=listar',
+            type: "get",
+            dataType: "json",
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        },
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo": true,
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+        "order": [[0, "asc"]],//Ordenar (columna,orden)
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    }).DataTable();
+});
+
+
 
 function cargarTopProductos() {
     let fecha_inicio = $("#top_fecha_inicio").val();
@@ -43,7 +104,7 @@ function cargarTopProductos() {
         data: datos,
         dataType: "json",
         success: function (productos) {
-            const backgroundColor = ["rgb(53, 137, 171)", "rgb(118, 171, 53)"]
+            const backgroundColor = ["rgb(53, 137, 171)", "rgb(118, 171, 53)", "rgb(227, 48, 175)", "rgb(149, 43, 224)", "rgb(224, 130, 43)", "rgb(7, 130, 12)"]
             let nombres = productos.map(p => p.nombre_producto);
             let vendidos = productos.map(p => parseInt(p.total_vendido));
 
@@ -76,3 +137,4 @@ function cargarTopProductos() {
         }
     });
 }
+

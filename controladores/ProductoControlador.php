@@ -1,12 +1,12 @@
 <?php
-    require_once("../config/Conexion.php");
-    require_once("../modelos/Producto.php");
+    require_once(__DIR__ . "/../config/Conexion.php");
+    require_once(__DIR__ . "/../modelos/Producto.php");
 
 
     $producto = new Producto();
 
 
-    switch($_GET["opc"]) {
+    switch(isset($_GET["opc"])) {
         case "listar":
             $datos=$producto->get_producto();
             $data=Array();
@@ -66,8 +66,29 @@
 
             
             break;
+
+        case "mostrar_faltantes":
+             $datos=$producto->get_productos_bajo_stock();
+            $data=Array();
+
+            foreach($datos as $dato) {
+                $mini_array = array();
+                $mini_array[] = $dato["id_producto"];
+                $mini_array[] = $dato["nombre_categoria"];
+                $mini_array[] = $dato["nombre_producto"];
+                $mini_array[] = $dato["descripcion"];
+                $mini_array[] = $dato["precio"];
+                $mini_array[] = $dato["costo"];
+                $mini_array[] = $dato["marca"];
+                $mini_array[] = $dato["min_stock"];
+                $mini_array[] = $dato["stock"];
+                $data[] = $mini_array;
+            }
+        break;
+
         case "eliminar":
             $producto -> delete_producto_id($_POST["id_producto"]);
             break;    
+        
     }
 ?>
