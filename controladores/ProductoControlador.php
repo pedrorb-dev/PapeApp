@@ -68,22 +68,24 @@
             break;
 
         case "mostrar_faltantes":
-             $datos=$producto->get_productos_bajo_stock();
+             $datos=$producto->get_productos_faltantes();
             $data=Array();
 
             foreach($datos as $dato) {
                 $mini_array = array();
-                $mini_array[] = $dato["id_producto"];
-                $mini_array[] = $dato["nombre_categoria"];
                 $mini_array[] = $dato["nombre_producto"];
-                $mini_array[] = $dato["descripcion"];
-                $mini_array[] = $dato["precio"];
-                $mini_array[] = $dato["costo"];
-                $mini_array[] = $dato["marca"];
-                $mini_array[] = $dato["min_stock"];
                 $mini_array[] = $dato["stock"];
+                $mini_array[] = $dato["stock_min"];
+                $mini_array[] = '<button type="button" class="btn btn-outline-primary btn-icon"><div>Agregar a pedido</div></button>'; 
                 $data[] = $mini_array;
             }
+
+             $respuesta = array(
+                "sEcho"=>1,
+                "iTotalRecords"=>count($data),
+                "iTotalDisplayRecords"=>count($data),
+                "aaData"=>$data);
+            echo json_encode($respuesta);
         break;
 
         case "eliminar":

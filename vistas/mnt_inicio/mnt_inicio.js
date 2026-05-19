@@ -26,16 +26,13 @@ $(document).ready(function () {
     });
 
     $("#btn_bajo_stock").click(function(){
-         console.log("click");
     $("#modalBajoStock").modal("show");
-
 });
 
 $.post("../../controladores/ProductoControlador.php?opc=mostrar_faltantes", function (data) {
-        $("#id_producto").html(data);
     });
 
-    tabla = $('#tabla-productos').dataTable({
+    tabla = $('#tabla-faltantes').dataTable({
         "aProcessing": true,//Activamos el procesamiento del datatables
         "aServerSide": true,//Paginación y filtrado realizados por el servidor
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
@@ -46,7 +43,7 @@ $.post("../../controladores/ProductoControlador.php?opc=mostrar_faltantes", func
             'pdf'
         ],
         "ajax": {
-            url: '../../controladores/ProductoControlador.php?opc=listar',
+            url: '../../controladores/ProductoControlador.php?opc=mostrar_faltantes',
             type: "get",
             dataType: "json",
             error: function (e) {
