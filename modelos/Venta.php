@@ -34,21 +34,32 @@ class Venta extends Conexion {
         $sql->execute();
         return $sql->fetchAll();
     }
-    
-    // Insertar venta y sus detalles (transacción)
-    public function insert_venta($fecha_venta, $total_venta, $detalles) {
+
+    public function get_total_ventas() {
         $conectar = parent::conectar();
         parent::set_names();
         
+        $sql = "SELECT COUNT(*) AS total_ventas
+                FROM ventas";
+        $sql = $conectar->prepare($sql);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    // Insertar venta y sus detalles (transacción)
+    public function insert_venta($fecha_venta, $total_venta, $detalles) {
+        $conectar = parent::conectar(); //hace la conexión a la base de datos
+        parent::set_names();
+        
         try {
-            $conectar->beginTransaction();
+            $conectar->beginTransaction(); //inicia una transacción
             
             // Insertar cabecera de venta
             $sql1 = "INSERT INTO ventas(id_venta, fecha_venta, total_venta) 
                      VALUES (NULL, ?, ?)";
             $stmt1 = $conectar->prepare($sql1);
-            $stmt1->bindValue(1, $fecha_venta);
-            $stmt1->bindValue(2, $total_venta);
+            $stmt1->bindValue(1, $fecha_venta); //relaciona los valores de fecha
+            $stmt1->bindValue(2, $total_venta); //relaciona el valor de total
             $stmt1->execute();
             
             $id_venta = $conectar->lastInsertId();

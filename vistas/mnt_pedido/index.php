@@ -16,11 +16,31 @@
     <!-- DATATABLES -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
+    <style>
+        #btn_faltantes{
+            margin-left: 30px;
+            height: 45px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        #btn_faltantes:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(159, 135, 40, 0.3);
+        }
+    </style>
+
 </head>
 <body>
     <?php require_once("../auth.php");  $titulo_pagina = 'Pedidos'; require_once("../menu.php");?>
     <div class="container">
-        <button class="btn btn-info my-3" id="add_prod">Agregar Pedido</button>
+        <button class="btn btn-custom-primary mb-4" id="add_prod">
+            <i class="fas fa-plus"></i> Agregar producto
+        </button>
+
+        <button class="btn btn-warning mb-4" id="btn_faltantes">
+            <i class="fa-solid fa-triangle-exclamation"></i>  Consulta productos en bajo stock
+        </button>
         <div class="table-responsive">
             <table id="tabla-productos" class="table table-striped table-bordered" style="width:100%">
             <thead>

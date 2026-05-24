@@ -47,10 +47,11 @@
             }
             break;
         case "mostrar":
-            $datos=$producto->get_producto_id($_POST["id_producto"]);
-            if(is_array($datos)==true and count($datos) > 0) {
-                $otp = array();
-                foreach($datos as $dato) {
+            //se obtiene la información del producto segun el id recibido por post
+            if(is_array($datos)==true and count($datos) > 0) { //verifica que la consulta devuelve datos
+            $datos=$producto->get_producto_id($_POST["id_producto"]); 
+                $otp = array(); //arreglo donde se almancenan los datos del producto
+                foreach($datos as $dato) { //recorre cada uno de los atributos del producto
                     $otp["id_producto"] = $dato["id_producto"];
                     $otp["id_categoria"] = $dato["id_categoria"];
                     $otp["nombre_producto"] = $dato["nombre_producto"];
@@ -61,6 +62,7 @@
                     $otp["min_stock"] = $dato["min_stock"];
                     $otp["stock"] = $dato["stock"];
                 }
+                //convierte el arrglo a formato JSON para enviarlo a AJAX
                 echo json_encode($otp);
             }
 

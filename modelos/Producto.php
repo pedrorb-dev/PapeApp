@@ -14,16 +14,16 @@
             return $respuesta;
         }
 
-        public function get_producto_id($id_prod) {
-            $conectar = parent::conectar();
+        public function get_producto_id($id_prod) { //consulta un producto pidiendo id
+            $conectar = parent::conectar(); //conecta  a la base de datos
             parent::set_names();
 
-            $sql = "SELECT * FROM productos WHERE id_producto = ?";
+            $sql = "SELECT * FROM productos WHERE id_producto = ?"; //consulta sql
             $sql = $conectar -> prepare($sql);
-            $sql -> bindValue(1, $id_prod);
-            $sql->execute();
-            $respuesta = $sql -> fetchAll();
-            return $respuesta;
+            $sql -> bindValue(1, $id_prod); //relaciona ? al id del producto
+            $sql->execute(); //ejecuta la consulta
+            $respuesta = $sql -> fetchAll(); //obtiene la respuesta de la consulta
+            return $respuesta; //retorna la respuesta
         }
 
         public function insert_producto($id_cat, $nombre_prod, $descripcion, $precio, $costo, $marca, $min_stock, $stock) {
@@ -98,7 +98,7 @@
         public function get_productos_bajo_stock()
         {
 
-            $conectar = parent::conectar();
+            $conectar = parent::conectar(); //se contecta a la base de datos
             parent::set_names();
 
             $sql = "SELECT COUNT(*) AS total

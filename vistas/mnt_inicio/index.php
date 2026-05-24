@@ -3,10 +3,13 @@
         $titulo_pagina = 'Bienvenido'; 
         require_once("../menu.php"); 
         require_once("../../controladores/ProductoControlador.php");
+        require_once("../../modelos/Venta.php");
     $producto = new Producto();
+    $venta = new Venta();
 
+    $total_ventas = $venta->get_total_ventas();
     $bajo_stock = $producto->get_productos_bajo_stock();
-    $total_productos = $producto-> get_total_productos();
+    $total_productos = $producto->get_total_productos();
     
     ?>
 <!DOCTYPE html>
@@ -120,11 +123,11 @@
             <div class="elemento">
                 <div>
                     Cantidad total de productos:
-                    <h2>
+                    <h3>
                         <?php
                         echo $total_productos["total_productos"];
                         ?>
-                    </h2>
+                    </h3>
                 </div>
                 <div>
                     <img src="img/box.png" alt="imagen warning" class = "box">
@@ -132,7 +135,12 @@
             </div>
             <div class="elemento">
                 <div>
-                    Productos vendidos
+                    Ventas del día:
+                    <h3>
+                        <?php
+                        echo $total_ventas["total_ventas"];
+                        ?>
+                    </h3>
                 </div>
                 <div>
                     <img src="img/shopping_bag.png" alt="imagen warning" class = "box">
