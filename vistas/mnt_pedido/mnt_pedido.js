@@ -140,10 +140,10 @@ $(document).ready(function () {
 
 function agregar_a_pedido(id_producto) {
 
-    // Obtener input de cantidad
+    // Obtener cantidad
     let cantidad = $("#cantidad_" + id_producto).val();
 
-    // Validación simple
+    // Validar
     if (cantidad <= 0 || cantidad === "") {
 
         Swal.fire(
@@ -158,7 +158,7 @@ function agregar_a_pedido(id_producto) {
     // AJAX
     $.ajax({
 
-        url: '../../controladores/PedidoControlador.php?opc=agregar_detalle',
+        url: '../../controladores/PedidoControlador.php?opc=guardar_editar',
 
         type: 'POST',
 
@@ -168,7 +168,8 @@ function agregar_a_pedido(id_producto) {
         },
 
         success: function (response) {
-
+            
+             console.log(response);
             let res = JSON.parse(response);
 
             if (res.success) {
@@ -181,6 +182,9 @@ function agregar_a_pedido(id_producto) {
 
                 // Recargar tabla principal
                 $('#tabla-productos').DataTable().ajax.reload();
+
+                // Reiniciar cantidad
+                $("#cantidad_" + id_producto).val(1);
 
             } else {
 
@@ -203,5 +207,36 @@ function agregar_a_pedido(id_producto) {
             );
         }
 
+    });
+}
+
+function eliminar(id_detalle_pedido) {
+
+    $.ajax({
+        url: '../../controladores/PedidoControlador.php?opc=eliminar_detalle',
+        type: 'POST',
+        data: {
+            id_detalle_pedido: id_detalle_pedido
+        },
+        success: function (response) {
+            console.log(response)
+            let res = JSON.parse(response);
+
+            if (res.success) {
+
+                Swal.fire('Eliminado', 'Producto removido del pedido', 'success');
+
+                // recargar tabla de detalles
+                $('#tabla-productos').DataTable().ajax.reload();
+
+            } else {
+
+                Swal.fire('Error', res.message, 'error');
+            }
+        },
+
+        error: function (e) {
+            console.log(e.responseText);
+        }
     });
 }

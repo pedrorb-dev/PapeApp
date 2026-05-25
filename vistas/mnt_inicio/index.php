@@ -150,7 +150,13 @@
             </div>
         </div>
 </div>
+<script>
+    $("#add_prod").click(function () {
 
+    window.location.href = "../mnt_pedido/index.php/";
+
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="mnt_inicio.js"></script>

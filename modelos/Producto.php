@@ -86,7 +86,7 @@
             $conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "SELECT nombre_producto, stock, min_stock 
+            $sql = "SELECT id_producto, nombre_producto, stock, min_stock 
                         FROM productos 
                         WHERE stock <= min_stock";
             $sql = $conectar -> prepare($sql);

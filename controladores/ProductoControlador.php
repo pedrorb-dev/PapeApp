@@ -78,8 +78,8 @@
                 $minion_array[] = $dato["nombre_producto"];
                 $minion_array[] = $dato["stock"];
                 $minion_array[] = $dato["min_stock"];
-                $minion_array[] = '<input type = "number" class = input-cantidad>'; 
-                $minion_array[] = '<button type="button" class="btn btn-outline-primary btn-icon"><div>Agregar</div></button>'; 
+                $minion_array[] = '<input type="number" id="cantidad_'.$dato["id_producto"].'" class="form-control form-control-sm" min="1" value="1" style="width:70px;">'; 
+                $minion_array[] = '<button type="button" class="btn btn-outline-primary btn-icon" onclick="agregar_a_pedido('.$dato["id_producto"].')"<div>Agregar</div></button>'; 
                 $data[] = $minion_array;
             }
 

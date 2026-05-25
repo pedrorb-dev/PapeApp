@@ -50,9 +50,9 @@
     $titulo_pagina = 'Pedidos';
     require_once("../menu.php"); ?>
     <div class="container">
-        <button class="btn btn-custom-primary mb-4" id="add_prod">
+        <!--<button class="btn btn-custom-primary mb-4" id="add_prod">
             <i class="fas fa-plus"></i> Agregar producto
-        </button>
+        </button>-->
 
         <button class="btn btn-warning mb-4" id="btn_faltantes">
             <i class="fa-solid fa-triangle-exclamation"></i> Consulta productos en bajo stock
@@ -104,7 +104,7 @@
                     <th>CANTIDAD</th>
                     <th>COSTO UNITARIO</th>
                     <th>SUBTOTAL</th>
-                    <th>EDITAR</th>
+                    <!--<th>EDITAR</th>-->
 
                     <?php
                     if($_SESSION["rol"] == "admin"){

@@ -33,7 +33,6 @@ class Pedido extends Conexion {
                        dp.id_detalle_pedido,
                        dp.id_producto,
                        dp.cantidad,
-                       dp.costo_estimado,
                        p.nombre_producto,
                        p.marca
                 FROM pedido pe
@@ -153,16 +152,14 @@ class Pedido extends Conexion {
                              (id_detalle_pedido,
                               id_pedido,
                               id_producto,
-                              cantidad,
-                              costo_estimado)
+                              cantidad)
                               VALUES
-                              (NULL, ?, ?, ?, ?)";
+                              (NULL, ?, ?, ?)";
 
                 $sqlInsert = $conectar->prepare($sqlInsert);
                 $sqlInsert->bindValue(1, $id_pedido);
                 $sqlInsert->bindValue(2, $id_producto);
                 $sqlInsert->bindValue(3, $cantidad);
-                $sqlInsert->bindValue(4, $costo);
                 $sqlInsert->execute();
             }
 
@@ -173,6 +170,10 @@ class Pedido extends Conexion {
         } catch(Exception $e){
 
             $conectar->rollBack();
+            echo json_encode([
+        "success" => false,
+        "error" => $e->getMessage()
+    ]);
 
             return false;
         }
@@ -236,20 +237,29 @@ class Pedido extends Conexion {
         }
     }
 
-    public function delete_detalle_pedido($id_detalle_pedido)
+    public function eliminar_detalle_pedido($id_detalle_pedido)
     {
         $conectar = parent::conectar();
         parent::set_names();
 
-        $sql = "DELETE FROM detalle_pedido
-            WHERE id_detalle_pedido = ?";
+        try {
 
-        $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $id_detalle_pedido);
-        $sql->execute();
+            $sql = "DELETE FROM detalle_pedido
+                WHERE id_detalle_pedido = ?";
+
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1, $id_detalle_pedido);
+            $sql->execute();
+
+            return true;
+
+        } catch (Exception $e) {
+
+            return false;
+        }
     }
 
-// OBTENER DETALLES DEL PEDIDO PENDIENTE
+    // OBTENER DETALLES DEL PEDIDO PENDIENTE
 
     public function get_detalles_pedido_pendiente()
     {
@@ -278,6 +288,23 @@ class Pedido extends Conexion {
 
         return $sql->fetchAll();
     }
+
+    public function update_detalle_pedido($id_detalle_pedido, $cantidad)
+{
+    $conectar = parent::conectar();
+    parent::set_names();
+
+    $sql = "UPDATE detalle_pedido
+            SET cantidad = ?
+            WHERE id_detalle_pedido = ?";
+
+    $sql = $conectar->prepare($sql);
+
+    $sql->bindValue(1, $cantidad);
+    $sql->bindValue(2, $id_detalle_pedido);
+
+    $sql->execute();
+}
 }
 
 
