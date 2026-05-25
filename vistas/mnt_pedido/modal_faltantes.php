@@ -22,6 +22,7 @@
                                 <th>Producto</th>
                                 <th>Existencias</th>
                                 <th>Stock mínimo</th>
+                                <th>Cantidad a pedir</th>
                                 <th>Agregar a pedido</th>        
                             </tr>
                         </thead>

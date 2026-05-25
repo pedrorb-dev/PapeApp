@@ -113,7 +113,9 @@
                         echo $bajo_stock["total"];
                         ?>
                         </p>
-                        <button type="submit" class="btn btn-primary" id="btn_bajo_stock">Ver productos</button>
+                         <button class="btn btn-custom-primary mb-4" id="add_prod">
+                            Ir a pedidos
+                        </button>
                     
                 </div>
                 <div>
@@ -152,7 +154,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="mnt_inicio.js"></script>
-<?php require_once("modal_faltantes.php")?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
